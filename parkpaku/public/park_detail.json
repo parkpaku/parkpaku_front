@@ -7,6 +7,7 @@
     "location": "부산 사하구 하단동 산 3-1 동아대학교 승학캠퍼스 S06",
     "latitude": "35.1158949746728",
     "longitude": "128.97636469434755",
+    "image": "../assets/image/1.png",
     "likes": 90
   },
   {
@@ -17,6 +18,7 @@
     "location": "부산 사상구 삼락동 29-46",
     "latitude": "35.1687484",
     "longitude": "128.9735403",
+    "image": "../assets/image/2.png",
     "likes": 123
   },
   {
@@ -28,6 +30,7 @@
     "latitude": "35.11562945126414",
     "longitude": "128.96711705619643",
     "likes": "2,132"
+
   },
   {
     "id": 3,
@@ -38,5 +41,15 @@
     "latitude": "35.1314259832913",
     "longitude": "128.968139156655",
     "likes": 12
+  },
+  {
+    "id": 4,
+    "name": "을숙도",
+    "type": "도시근린공원",
+    "description": "철새가 사는 곳",
+    "location": "부산광역시 을숙도",
+    "latitude": "35.1037833",
+    "longitude": "128.9430727",
+    "likes": 60
   }
 ]
