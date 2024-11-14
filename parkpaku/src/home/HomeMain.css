@@ -107,3 +107,55 @@
 .popular-paku-scroll-container::-webkit-scrollbar {
   display: none;
 }
+
+/* Map.css */
+/* map 영역 스타일 */
+#map {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between; /* 항목 간 간격을 자동으로 조정 */
+  gap: 8px; /* 항목 간 간격 */
+  padding: 10px;
+}
+
+/* 각 항목 스타일 */
+#map > div {
+  width: 90px; /* 아이콘 크기 */
+  height: 120px; /* 텍스트를 포함한 높이 */
+  display: flex;
+  flex-direction: column; /* 이미지와 텍스트를 세로로 배치 */
+  justify-content: center;
+  align-items: center; /* 아이템 중앙 정렬 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+/* SVG 아이콘 크기 */
+#map svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 구 이름 텍스트 스타일 */
+#map p {
+  margin-top: 8px; /* 이미지와 텍스트 간격 */
+  font-size: 12px; /* 텍스트 크기 */
+  font-weight: bold; /* 텍스트 두껍게 */
+  color: #333; /* 텍스트 색상 */
+}
+
+.color-gray {
+  fill: #f2f1ea; /* 회색 */
+}
+
+.color-light {
+  fill: #b3c187; /* 연한 색 */
+}
+
+.color-medium {
+  fill: #85964d; /* 중간 색 (주황색) */
+}
+
+.color-dark {
+  fill: #707d49; /* 진한 색 (빨간색) */
+}

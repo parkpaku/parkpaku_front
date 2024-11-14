@@ -10,8 +10,8 @@ import myPakuIcon from "../assets/home/bottomBar/ic_myPaku.png";
 function BottomBar() {
   return (
     <nav className="bottom-bar">
-      <Link to="/" className="bottom-bar-item">
-        <img src={homeIcon} className="bottom-bar-icon" />
+      <Link to="/home" className="bottom-bar-item">
+        <AiFillHome size={24} />
         <span>홈</span>
       </Link>
       <Link to="/community" className="bottom-bar-item">

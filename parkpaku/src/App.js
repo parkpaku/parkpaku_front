@@ -6,6 +6,7 @@ import MyPaku from "./components/myPaku/Map.jsx";
 import PakuDetail from "./parkDetail/ParkDetailMain.jsx";
 import Signup from "./components/signup/Signup.jsx";
 import ReviewWrite from "./review/ReviewWrite.jsx";
+import SplashScreen from "./home/SplashScreen.jsx";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       >
         <main style={{ flex: 1 }}>
           <Routes>
-            <Route path="/" element={<HomeMain />} />
+            <Route path="/" element={<SplashScreen />} />
+            <Route path="/home" element={<HomeMain />} />
             <Route path="/myPaku" element={<MyPaku />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/paku/:id" element={<PakuDetail />} />
