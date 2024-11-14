@@ -3,15 +3,16 @@ import { useNavigate, Link } from "react-router-dom";
 import PopularPakuCard from "./PopularPakuCard";
 import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
+import logoPath from "../assets/Logo.svg";
 
 function HomeMain() {
   const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
 
   const popularPacus = [
-    { id: 1, title: "삼락 생태공원", description: "인기있는 Paku 1 설명" },
-    { id: 2, title: "Paku 2", description: "인기있는 Paku 2 설명" },
-    { id: 3, title: "Paku 3", description: "인기있는 Paku 3 설명" },
-    { id: 4, title: "Paku 4", description: "인기있는 Paku 4 설명" },
+    { id: 0, title: "삼락 생태공원", description: "부산 최대 규모 공원" },
+    { id: 1, title: "산학협력관", description: "해커톤이 진행 중입니다." },
+    { id: 2, title: "Paku 3", description: "인기있는 Paku 3 설명" },
+    { id: 3, title: "Paku 4", description: "인기있는 Paku 4 설명" },
   ];
 
   const userData = {
@@ -28,7 +29,9 @@ function HomeMain() {
   return (
     <div className="home-main">
       <section className="header-section">
-        <div className="header-image-placeholder">로고</div>
+        <div className="header-image-placeholder">
+          <img src={logoPath}></img>
+        </div>
         <Link to="/signup">
           <div className="profile-placeholder">회원가입</div>
         </Link>
@@ -77,6 +80,7 @@ function HomeMain() {
               key={paku.id}
               title={paku.title}
               description={paku.description}
+              id={paku.id}
               onClick={() => detailHandle(paku.id)} // 클릭 핸들러 추가
             />
           ))}
