@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import PopularPakuCard from "./PopularPakuCard";
 import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
 import logoPath from "../assets/Logo.svg";
+import profilePath from "../assets/home/ic_profile.png";
+
+import visitedIcon from "../assets/home/ic_visitedPaku.png";
+import badgeIcon from "../assets/home/ic_badge.png";
+import noVisitedIcon from "../assets/home/ic_noVisitedPaku.png";
 
 import { ReactComponent as GangseoSVG } from "../assets/강서구.svg"; // 강서구
 import { ReactComponent as GeumjeongSVG } from "../assets/금정구.svg"; // 금정구
@@ -23,22 +28,76 @@ import { ReactComponent as JungguSVG } from "../assets/중구.svg"; // 중구
 import { ReactComponent as HaeundaeSVG } from "../assets/해운대구.svg"; // 해운대구
 
 function HomeMain() {
+  const [popularPacus, setPopularPacus] = useState([]);
+  const [userData, setUserData] = useState({
+    visited: 0,
+    notVisited: 0,
+    badge: 0,
+    todayVisit: 0,
+  });
   const [items, setItems] = useState([]); // 구역 데이터
   const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
 
-  const popularPacus = [
-    { id: 0, title: "삼락 생태공원", description: "부산 최대 규모 공원" },
-    { id: 1, title: "산학협력관", description: "해커톤이 진행 중입니다." },
-    { id: 2, title: "Paku 3", description: "인기있는 Paku 3 설명" },
-    { id: 3, title: "Paku 4", description: "인기있는 Paku 4 설명" },
-  ];
+  // park_detail.json에서 데이터를 가져오는 useEffect
+  useEffect(() => {
+    const fetchPopularPacus = async () => {
+      try {
+        const response = await fetch("/park_detail.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-  const userData = {
-    visited: 24,
-    notVisited: 256,
-    badge: 7,
-    todayVisit: 2,
-  };
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setPopularPacus(data); // 데이터를 상태에 설정
+      } catch (error) {
+        console.error("데이터를 가져오는 중 에러 발생:", error);
+      }
+    };
+
+    fetchPopularPacus();
+  }, []);
+
+  // user_info.json에서 데이터를 가져와서 userData에 설정하는 useEffect
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/user_info.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        // ID가 2인 사용자의 데이터를 찾음
+        const selectedUser = data.find((user) => user.id === 2);
+        if (selectedUser) {
+          setUserData({
+            visited: selectedUser.visited,
+            notVisited: selectedUser.notVisited,
+            badge: selectedUser.badge,
+            todayVisit: selectedUser.todayVisit,
+          });
+        } else {
+          console.error("ID가 2인 사용자의 데이터를 찾을 수 없습니다.");
+        }
+      } catch (error) {
+        console.error("사용자 데이터를 가져오는 중 에러 발생:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const detailHandle = (id) => {
     navigate(`/paku/${id}`); // 특정 id에 대한 페이지로 이동
@@ -110,13 +169,13 @@ function HomeMain() {
     <div className="home-main">
       <section className="header-section">
         <div className="header-image-placeholder">
-          <img src={logoPath}></img>
+          <img src={logoPath} alt="로고" />
         </div>
         <Link to="/signup">
           <div className="profile-placeholder">회원가입</div>
         </Link>
         <Link to="/my">
-          <div className="profile-placeholder">프로필</div>
+          <img src={profilePath} className="profile-placeholder" alt="프로필" />
         </Link>
       </section>
 
@@ -166,16 +225,19 @@ function HomeMain() {
 
       <section className="summary-section">
         <SummaryItem
+          path={visitedIcon}
           iconPlaceholder="아이콘"
           label="다녀온 Paku"
           value={`${userData.visited}곳`}
         />
         <SummaryItem
+          path={noVisitedIcon}
           iconPlaceholder="아이콘"
           label="안가본 Paku"
           value={`${userData.notVisited}곳`}
         />
         <SummaryItem
+          path={badgeIcon}
           iconPlaceholder="아이콘"
           label="나의 배지"
           value={`${userData.badge}개`}
@@ -188,7 +250,7 @@ function HomeMain() {
           {popularPacus.map((paku) => (
             <PopularPakuCard
               key={paku.id}
-              title={paku.title}
+              title={paku.name} // park_detail.json의 name 사용
               description={paku.description}
               id={paku.id}
               onClick={() => detailHandle(paku.id)} // 클릭 핸들러 추가

@@ -30,8 +30,7 @@
 }
 
 .profile-placeholder {
-  width: 60px;
-  height: 30px;
+  height: 35px;
   background-color: #ccc;
   display: flex;
   align-items: center;

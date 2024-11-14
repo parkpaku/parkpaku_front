@@ -47,28 +47,34 @@ function ParkDetailMain({
   useEffect(() => {
     const fetchParkData = async () => {
       try {
-        const response = await fetch(`${SERVER_IP}/park/${id}`, {
+        const response = await fetch("/park_detail.json", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
 
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          const data = await response.json();
-          setParkData(data); // 데이터를 상태에 설정
+        // console.log("response:", response);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        // id 값에 따라 데이터를 필터링
+        const selectedPark = data.find((park) => park.id === Number(id));
+        if (selectedPark) {
+          setParkData(selectedPark);
         } else {
-          const textResponse = await response.text();
-          console.error("예상치 않은 응답 (JSON이 아님):", textResponse);
+          console.error("해당 id에 대한 데이터를 찾을 수 없습니다.");
         }
       } catch (error) {
-        console.error("에러 발생:", error);
+        console.error("데이터를 가져오는 중 에러 발생:", error);
       }
     };
 
     if (id) {
-      fetchParkData(); // id가 존재할 경우 데이터 가져오기
+      fetchParkData(); // id가 있을 경우 데이터 가져오기
     }
   }, [id]);
 
@@ -86,21 +92,21 @@ function ParkDetailMain({
   // 현재 유저의 위치 값 얻기 및 Paku 인증 시작
   const getLocation = () => {
     if (navigator.geolocation) {
-      setIsVerifying(true); // 인증 중 상태로 변경
+      setIsVerifying(true); // 인증 중 상태
       setVerificationMessage("인증 중이에요\n잠시만 기다려주세요...");
 
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
-          console.log(`현재 위치: 위도 ${latitude}, 경도 ${longitude}`);
           checkProximity(latitude, longitude);
         },
         (error) => {
           setIsVerifying(false);
           setVerificationMessage("위치를 가져오는데 실패했습니다.");
           console.error("위치를 가져오는데 실패했습니다.", error);
-        }
+        },
+        { enableHighAccuracy: true }
       );
     } else {
       setVerificationMessage("이 브라우저는 Geolocation을 지원하지 않습니다.");
@@ -119,9 +125,10 @@ function ParkDetailMain({
       targetLongitude
     );
 
-    setIsVerifying(false); // 인증 상태 해제
-    if (distance <= 3) {
-      // 예: 3km 이내
+    setIsVerifying(false);
+    console.log("distance (km 단위):", distance);
+    if (distance <= 1.5) {
+      // 예: 1.5km 이내
       setVerificationMessage("최고예요!\n다녀온 Paku 수가 늘었어요");
     } else {
       setVerificationMessage("현재 위치가 해당 위치와 멀리 떨어져 있습니다.");
@@ -141,6 +148,7 @@ function ParkDetailMain({
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
     return R * c; // 거리 반환 (단위: km)
   };
 
@@ -210,9 +218,22 @@ function ParkDetailMain({
       </button>
 
       <section className="popular-review">
-        <h3>인기 많은 후기</h3>
+        <h3>최신 후기</h3>
         <div className="review-card">
-          <h4>아이랑 함께 왔어요</h4>
+          <p>
+            오늘 아침에 같이 산책겸 생태공원에 왔어요. 여기에 오늘 보니깐
+            이벤트가 있..
+          </p>
+          <p>태연맘 | 24.11.14</p>
+        </div>
+        <div className="review-card">
+          <p>
+            오늘 아침에 같이 산책겸 생태공원에 왔어요. 여기에 오늘 보니깐
+            이벤트가 있..
+          </p>
+          <p>태연맘 | 24.11.14</p>
+        </div>
+        <div className="review-card">
           <p>
             오늘 아침에 같이 산책겸 생태공원에 왔어요. 여기에 오늘 보니깐
             이벤트가 있..
