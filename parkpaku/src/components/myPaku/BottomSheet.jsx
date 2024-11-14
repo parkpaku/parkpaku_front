@@ -35,13 +35,21 @@ function BottomSheet() {
 
   const handleTouchEnd = () => {
     isDragging.current = false;
-    // 조건에 따라 바텀시트를 닫거나 열도록 설정
+
+    // 아이템 개수에 따라 바텀시트 높이를 동적으로 조정합니다.
+    const numberOfItems = items.filter((item) => item.visits > 0).length;
+
     if (deltaY < 0) {
-      setPosition(-250); // 20% 높이에 위치
+      // 위로 올린 경우: 아이템의 개수에 따라 위치를 조정합니다.
+      // 예: 0개일 경우에는 바텀시트가 살짝 올라가게 하고, 3개일 경우에는 아이템이 보이도록 올리기
+      if (numberOfItems === 0) {
+        setPosition(-50); // 아이템이 없으면 살짝 올라가는 효과만
+      } else {
+        setPosition(-numberOfItems * 100); // 아이템 개수에 맞춰 올라가기
+      }
     } else {
-      console.log("items:", items);
-      // setPosition(0 + items.length * 30); // 초기 위치로 복귀
-      setPosition(0); // 초기 위치로 복귀
+      // 아래로 내린 경우: 원위치로 돌아가기
+      setPosition(0); // 원래 위치로 복귀 (이미지 1처럼)
     }
   };
 

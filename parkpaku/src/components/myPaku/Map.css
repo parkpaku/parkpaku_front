@@ -12,3 +12,20 @@
 .map {
   margin: 10px;
 }
+
+/* Map.css */
+.color-gray {
+  fill: #f2f1ea; /* 회색 */
+}
+
+.color-light {
+  fill: #b3c187; /* 연한 색 */
+}
+
+.color-medium {
+  fill: #85964d; /* 중간 색 (주황색) */
+}
+
+.color-dark {
+  fill: #707d49; /* 진한 색 (빨간색) */
+}
