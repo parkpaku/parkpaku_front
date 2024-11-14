@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./BottomSheet.css";
 
 function BottomSheet() {
@@ -8,6 +8,19 @@ function BottomSheet() {
   const isDragging = useRef(false);
   const [deltaY, setDeltaY] = useState(0);
   const [activeTab, setActiveTab] = useState("visited"); // 현재 활성화된 탭
+  const [items, setItems] = useState([]); // items 상태 초기화
+
+  useEffect(() => {
+    // JSON 파일을 fetch로 불러와서 상태에 저장
+    fetch("/park_data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setItems(data); // 불러온 데이터를 items 상태에 저장
+      })
+      .catch((error) => {
+        console.error("Error loading JSON:", error);
+      });
+  }, []);
 
   const handleTouchStart = (e) => {
     startY.current = e.touches[0].clientY;
@@ -24,8 +37,10 @@ function BottomSheet() {
     isDragging.current = false;
     // 조건에 따라 바텀시트를 닫거나 열도록 설정
     if (deltaY < 0) {
-      setPosition(-500); // 20% 높이에 위치
+      setPosition(-250); // 20% 높이에 위치
     } else {
+      console.log("items:", items);
+      // setPosition(0 + items.length * 30); // 초기 위치로 복귀
       setPosition(0); // 초기 위치로 복귀
     }
   };
@@ -63,19 +78,28 @@ function BottomSheet() {
         </div>
       </div>
       <div className="list">
-        {activeTab === "visited" ? (
-          <div className="list-item">
-            <p>삼락 생태공원</p>
-            <p>부산 사상구</p>
-            <button>ㅇ</button>
-          </div>
-        ) : (
-          <div className="list-item">
-            <p>해운대 해수욕장</p>
-            <p>부산 해운대구</p>
-            <button>ㅇ</button>
-          </div>
-        )}
+        {activeTab === "visited"
+          ? // 방문한 Paku 목록
+            items
+              .filter((item) => item.visits > 0) // 방문 횟수가 0보다 큰 아이템만 필터링
+              .map((item, index) => (
+                <div className="list-item" key={index}>
+                  <p>{item.name}</p>
+                  <p>{item.location}</p>
+                  <p>방문 횟수: {item.visits}</p>
+                  <button>ㅇ</button>
+                </div>
+              ))
+          : // 안 간 Paku 목록
+            items
+              .filter((item) => item.visits === 0) // 방문 횟수가 0인 아이템만 필터링
+              .map((item, index) => (
+                <div className="list-item" key={index}>
+                  <p>{item.name}</p>
+                  <p>{item.location}</p>
+                  <button>ㅇ</button>
+                </div>
+              ))}
       </div>
     </div>
   );

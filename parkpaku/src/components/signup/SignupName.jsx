@@ -3,11 +3,11 @@ import "./Signup.css";
 
 function SignupName({ onNext }) {
   const [name, setName] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [memberId, setNickname] = useState("");
 
   const handleSubmit = () => {
-    if (name && nickname) {
-      onNext({ name, nickname }); // 이름과 닉네임을 부모로 전달
+    if (name && memberId) {
+      onNext({ name, memberId }); // 이름과 닉네임을 부모로 전달
     } else {
       alert("이름과 닉네임을 모두 입력해주세요."); // 유효성 검사
     }
@@ -38,16 +38,16 @@ function SignupName({ onNext }) {
         <input
           type="text"
           id="nickname"
-          value={nickname}
+          value={memberId}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="요술단지 파쿠"
         />
       </div>
 
       <button
-        className={`signup-button ${name && nickname ? "active" : ""}`} // 이름과 닉네임이 입력되면 버튼 활성화
+        className={`signup-button ${name && memberId ? "active" : ""}`} // 이름과 닉네임이 입력되면 버튼 활성화
         onClick={handleSubmit} // 다음 버튼 클릭 시 부모로 전달
-        disabled={!name || !nickname} // 둘 중 하나라도 없으면 비활성화
+        disabled={!name || !memberId} // 둘 중 하나라도 없으면 비활성화
       >
         다음
       </button>

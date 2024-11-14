@@ -22,7 +22,7 @@ function App() {
             <Route path="/reviewWrite/:id" element={<ReviewWrite />} />
           </Routes>
         </main>
-        {/*<BottomBar />*/}
+        <BottomBar />
       </div>
     </Router>
   );
