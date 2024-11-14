@@ -36,6 +36,7 @@ function HomeMain() {
     todayVisit: 0,
   });
   const [items, setItems] = useState([]); // 구역 데이터
+  const [groupedItems, setGroupedItems] = useState([]);
   const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
 
   // park_detail.json에서 데이터를 가져오는 useEffect
@@ -99,6 +100,27 @@ function HomeMain() {
     fetchUserData();
   }, []);
 
+  // 공원 데이터 그룹화 함수
+  useEffect(() => {
+    const groupByLocation = () => {
+      const grouped = items.reduce((acc, current) => {
+        const { location, visits } = current;
+        if (!acc[location]) {
+          acc[location] = { location, visits: 0, parks: [] };
+        }
+        acc[location].visits += visits;
+        acc[location].parks.push(current);
+        return acc;
+      }, {});
+
+      setGroupedItems(Object.values(grouped)); // 그룹화된 결과를 상태에 설정
+    };
+
+    if (items.length) {
+      groupByLocation();
+    }
+  }, [items]);
+
   const detailHandle = (id) => {
     navigate(`/paku/${id}`); // 특정 id에 대한 페이지로 이동
   };
@@ -119,10 +141,10 @@ function HomeMain() {
   // 방문 수에 따라 색상 진하기를 다르게 설정
   const getRegionColor = (visits) => {
     if (visits === 0) return "color-gray"; // 방문 수 0: 회색
-    if (visits >= 1 && visits <= 3) return "color-light"; // 1~3: 연한 색
-    if (visits >= 4 && visits <= 6) return "color-medium"; // 4~6: 중간 색
-    if (visits >= 7 && visits <= 10) return "color-dark"; // 7~10: 진한 색
-    if (visits >= 11) return "color-dip-dark"; // 11개 이상 : 가장 진한 색
+    if (visits >= 1 && visits <= 5) return "color-light"; // 1~3: 연한 색
+    if (visits >= 6 && visits <= 10) return "color-medium"; // 4~6: 중간 색
+    if (visits >= 11 && visits <= 15) return "color-dark"; // 7~10: 진한 색
+    if (visits >= 16) return "color-dip-dark"; // 11개 이상 : 가장 진한 색
     return "color-gray"; // 기본 색상
   };
 
@@ -183,9 +205,10 @@ function HomeMain() {
       <h2>
         오늘은
         <br />
-        {userData.todayVisit}곳의 Paku를 다녀왔어요
+        {/*userData.todayVisit*/}1곳의 Paku를 다녀왔어요
       </h2>
 
+      {/* 지역별 공원 표시 */}
       <section className="colored-area">
         <Link
           to="/myPakuList"
@@ -200,7 +223,7 @@ function HomeMain() {
                 flexWrap: "wrap",
               }}
             >
-              {items.map((item, index) => (
+              {groupedItems.map((group, index) => (
                 <div
                   key={index}
                   style={{
@@ -210,16 +233,16 @@ function HomeMain() {
                   }}
                 >
                   {/* SVG를 색상과 함께 렌더링 */}
-                  {React.cloneElement(getRegionSVG(item.location), {
-                    className: getRegionColor(item.visits), // 스타일을 적용할 CSS 클래스 이름을 추가
+                  {React.cloneElement(getRegionSVG(group.location), {
+                    className: getRegionColor(group.visits), // 스타일을 적용할 CSS 클래스 이름을 추가
                     style: {
                       pointerEvents: "all",
                       width: "100%", // SVG 크기 설정
                       height: "100%", // SVG 크기 설정
                     },
                   })}
-                  {/* item 정보 출력 */}
-                  <p>{item.location}</p>
+                  {/* location 정보 출력 */}
+                  <p>{group.location}</p>
                 </div>
               ))}
             </div>

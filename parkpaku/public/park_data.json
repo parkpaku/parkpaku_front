@@ -33,5 +33,40 @@
     "name": "시민공원",
     "location": "부산진구",
     "visits": 0
+  },
+  {
+    "name": "시민공원",
+    "location": "강서구",
+    "visits": 0
+  },
+  {
+    "name": "금정공원",
+    "location": "금정구",
+    "visits": 7
+  },
+  {
+    "name": "황산공원",
+    "location": "기장군",
+    "visits": 15
+  },
+  {
+    "name": "친수공원",
+    "location": "동구",
+    "visits": 25
+  },
+  {
+    "name": "북구공원",
+    "location": "북구",
+    "visits": 0
+  },
+  {
+    "name": "아아공원",
+    "location": "서구",
+    "visits": 0
+  },
+  {
+    "name": "민주공원",
+    "location": "중구",
+    "visits": 11
   }
 ]
