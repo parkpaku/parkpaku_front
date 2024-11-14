@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PopularPakuCard from "./PopularPakuCard";
 import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
@@ -20,22 +21,25 @@ function HomeMain() {
       </section>
 
       <section className="colored-area">
-        <h3>색칠 된 녹지</h3>
-        <div className="colored-area-placeholder" />
+        <Link to="/myPaku" style={{ textDecoration: "none", color: "inherit" }}>
+          <div className="colored-area-placeholder">
+            <h3>색칠 된 녹지</h3>
+          </div>
+        </Link>
       </section>
 
       <section className="summary-section">
         <SummaryItem
           iconPlaceholder="아이콘"
           label="다녀온 Paku"
-          value="12곳"
+          value="44곳"
         />
         <SummaryItem
           iconPlaceholder="아이콘"
           label="안가본 Paku"
-          value="456곳"
+          value="256곳"
         />
-        <SummaryItem iconPlaceholder="아이콘" label="나의 배지" value="5개" />
+        <SummaryItem iconPlaceholder="아이콘" label="나의 배지" value="12개" />
       </section>
 
       <section className="popular-section">
