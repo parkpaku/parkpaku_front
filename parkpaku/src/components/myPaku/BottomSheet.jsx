@@ -39,6 +39,8 @@ function BottomSheet() {
     if (deltaY < 0) {
       setPosition(-250); // 20% 높이에 위치
     } else {
+      console.log("items:", items);
+      // setPosition(0 + items.length * 30); // 초기 위치로 복귀
       setPosition(0); // 초기 위치로 복귀
     }
   };
