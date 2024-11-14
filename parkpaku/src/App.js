@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeMain from "./home/HomeMain";
 import BottomBar from "./common/BottomBar";
 import MyPaku from "./components/myPaku/Map.jsx";
+import PakuDetail from "./parkDetail/ParkDetailMain.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeMain />} />
             <Route path="/myPaku" element={<MyPaku />} />
+            <Route path="/pakuDetail" element={<PakuDetail />} />
           </Routes>
         </main>
         <BottomBar />

@@ -15,10 +15,17 @@ function HomeMain() {
   return (
     <div className="home-main">
       <section className="header-section">
-        <div className="header-image-placeholder" />
-        <h2>오늘은</h2>
-        <h2>1곳의 Paku를 다녀왔어요</h2>
+        <div className="header-image-placeholder">로고</div>
+        <Link to="/myPaku">
+          <div className="profile-placeholder">프로필</div>
+        </Link>
       </section>
+
+      <h2>
+        오늘은
+        <br />
+        1곳의 Paku를 다녀왔어요
+      </h2>
 
       <section className="colored-area">
         <Link to="/myPaku" style={{ textDecoration: "none", color: "inherit" }}>
