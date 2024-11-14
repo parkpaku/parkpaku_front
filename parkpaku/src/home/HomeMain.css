@@ -4,10 +4,12 @@
 }
 
 .home-main h2 {
+  font-family: "Pretendard";
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 24px;
   color: #000;
+  font-weight: 200;
 }
 
 .header-section {

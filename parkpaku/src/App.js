@@ -5,6 +5,7 @@ import BottomBar from "./common/BottomBar";
 import MyPaku from "./components/myPaku/Map.jsx";
 import PakuDetail from "./parkDetail/ParkDetailMain.jsx";
 import Signup from "./components/signup/Signup.jsx";
+import ReviewWrite from "./review/ReviewWrite.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/myPaku" element={<MyPaku />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/paku/:id" element={<PakuDetail />} />
+            <Route path="/reviewWrite/:id" element={<ReviewWrite />} />
           </Routes>
         </main>
         <BottomBar />

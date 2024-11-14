@@ -161,3 +161,19 @@
   object-fit: cover; /* 이미지를 잘라서 채우기 */
   border-radius: 18px;
 }
+
+.write-review-button {
+  display: block;
+  margin: 16px auto; /* 가운데 정렬을 위해 auto 설정 */
+  padding: 12px 24px;
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+.write-review-button:hover {
+  background-color: #e0e0e0;
+}
