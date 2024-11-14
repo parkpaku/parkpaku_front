@@ -14,7 +14,7 @@ function BottomBar() {
         <AiFillHome size={24} />
         <span>홈</span>
       </Link>
-      <Link to="/community" className="bottom-bar-item">
+      <Link to="/myPakuList" className="bottom-bar-item">
         <img src={myPakuIcon} className="bottom-bar-icon" />
         <span>나의 Paku</span>
       </Link>

@@ -11,6 +11,12 @@
   border-radius: 18px;
 }
 
+.back {
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+}
+
 .image-placeholder {
   width: 100%;
   height: 200px;
