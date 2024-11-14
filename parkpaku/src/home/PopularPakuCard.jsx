@@ -1,12 +1,14 @@
 import React from "react";
-import "./PopularPakuCard.css"; // 스타일링을 위한 CSS 파일
+import "./PopularPakuCard.css";
 
 function PopularPacuCard({ title, description }) {
   return (
     <div className="popular-pacu-card">
-      <div className="card-image-placeholder" />
-      <h4>{title}</h4>
-      <p>{description}</p>
+      <div className="card-image-placeholder">이미지</div>
+      <div className="card-info">
+        <h4>{title}</h4>
+        <p>{description}</p>
+      </div>
     </div>
   );
 }

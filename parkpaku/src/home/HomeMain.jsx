@@ -1,14 +1,14 @@
 import React from "react";
-import PopularPacuCard from "./PopularPakuCard"; // 파일명도 일치시키기
+import PopularPakuCard from "./PopularPakuCard";
+import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
 
 function HomeMain() {
-  // 예시 데이터
   const popularPacus = [
-    { title: "Pacu 1", description: "인기있는 Pacu 1 설명" },
-    { title: "Pacu 2", description: "인기있는 Pacu 2 설명" },
-    { title: "Pacu 3", description: "인기있는 Pacu 3 설명" },
-    { title: "Pacu 4", description: "인기있는 Pacu 4 설명" },
+    { title: "Paku 1", description: "인기있는 Paku 1 설명" },
+    { title: "Paku 2", description: "인기있는 Paku 2 설명" },
+    { title: "Paku 3", description: "인기있는 Paku 3 설명" },
+    { title: "Paku 4", description: "인기있는 Paku 4 설명" },
   ];
 
   return (
@@ -16,7 +16,7 @@ function HomeMain() {
       <section className="header-section">
         <div className="header-image-placeholder" />
         <h2>오늘은</h2>
-        <h2>1곳의 Pacu를 다녀왔어요</h2>
+        <h2>1곳의 Paku를 다녀왔어요</h2>
       </section>
 
       <section className="colored-area">
@@ -25,32 +25,27 @@ function HomeMain() {
       </section>
 
       <section className="summary-section">
-        <div className="summary-item">
-          <div className="summary-image-placeholder" />
-          <p>다녀온 Pacu</p>
-          <p>4곳</p>
-        </div>
-        <div className="summary-item">
-          <div className="summary-image-placeholder" />
-          <p>안가본 Pacu</p>
-          <p>12곳</p>
-        </div>
-        <div className="summary-item">
-          <div className="summary-image-placeholder" />
-          <p>나의 배지</p>
-          <p>4개</p>
-        </div>
+        <SummaryItem
+          iconPlaceholder="아이콘"
+          label="다녀온 Paku"
+          value="12곳"
+        />
+        <SummaryItem
+          iconPlaceholder="아이콘"
+          label="안가본 Paku"
+          value="456곳"
+        />
+        <SummaryItem iconPlaceholder="아이콘" label="나의 배지" value="5개" />
       </section>
+
       <section className="popular-section">
         <h3>인기있는 Paku</h3>
         <div className="popular-paku-scroll-container">
-          {" "}
-          {/* 클래스명 통일 */}
-          {popularPacus.map((pacu, index) => (
-            <PopularPacuCard
+          {popularPacus.map((paku, index) => (
+            <PopularPakuCard
               key={index}
-              title={pacu.title}
-              description={pacu.description}
+              title={paku.title}
+              description={paku.description}
             />
           ))}
         </div>

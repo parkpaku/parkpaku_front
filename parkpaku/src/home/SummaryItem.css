@@ -1,0 +1,32 @@
+.summary-item {
+  text-align: center;
+  flex: 1;
+}
+
+.summary-image-placeholder {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin: 0 auto; /* 수평 중앙 정렬 */
+}
+
+.summary-item p {
+  margin: 0;
+}
+
+.summary-item-label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.summary-item-value {
+  font-size: 12px;
+  color: #555; /* 필요 시 색상 조정 */
+}
