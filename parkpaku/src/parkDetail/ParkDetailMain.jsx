@@ -29,7 +29,7 @@ function ParkDetailMain({
             method: "GET",
             headers: new Headers({
               "Content-Type": "application/json",
-              "ngrok-skip-browser-warning": "69420", // 추가된 헤더
+              "ngrok-skip-browser-warning": "69420",
             }),
           }
         );
