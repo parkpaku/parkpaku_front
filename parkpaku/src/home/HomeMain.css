@@ -22,7 +22,7 @@
 .header-image-placeholder {
   width: 60px; /* 필요시 크기 조정 */
   height: 30px;
-  background-color: #ccc;
+  /* background-color: #ccc; */
   display: flex;
   align-items: center;
   justify-content: center;

@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import PopularPakuCard from "./PopularPakuCard";
 import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
+import logoPath from "../assets/Logo.svg";
 
 function HomeMain() {
   const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
@@ -28,7 +29,9 @@ function HomeMain() {
   return (
     <div className="home-main">
       <section className="header-section">
-        <div className="header-image-placeholder">로고</div>
+        <div className="header-image-placeholder">
+          <img src={logoPath}></img>
+        </div>
         <Link to="/signup">
           <div className="profile-placeholder">회원가입</div>
         </Link>
