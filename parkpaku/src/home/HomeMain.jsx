@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import PopularPakuCard from "./PopularPakuCard";
 import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
 import logoPath from "../assets/Logo.svg";
+import profilePath from "../assets/home/ic_profile.png";
+
+import visitedIcon from "../assets/home/ic_visitedPaku.png";
+import badgeIcon from "../assets/home/ic_badge.png";
+import noVisitedIcon from "../assets/home/ic_noVisitedPaku.png";
 
 function HomeMain() {
+  const [popularPacus, setPopularPacus] = useState([]);
   const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
-
-  const popularPacus = [
-    { id: 0, title: "삼락 생태공원", description: "부산 최대 규모 공원" },
-    { id: 1, title: "산학협력관", description: "해커톤이 진행 중입니다." },
-    { id: 2, title: "Paku 3", description: "인기있는 Paku 3 설명" },
-    { id: 3, title: "Paku 4", description: "인기있는 Paku 4 설명" },
-  ];
 
   const userData = {
     visited: 24,
@@ -21,6 +20,31 @@ function HomeMain() {
     badge: 7,
     todayVisit: 2,
   };
+
+  // park_detail.json에서 데이터를 가져오는 useEffect
+  useEffect(() => {
+    const fetchPopularPacus = async () => {
+      try {
+        const response = await fetch("/park_detail.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setPopularPacus(data); // 데이터를 상태에 설정
+      } catch (error) {
+        console.error("데이터를 가져오는 중 에러 발생:", error);
+      }
+    };
+
+    fetchPopularPacus();
+  }, []);
 
   const detailHandle = (id) => {
     navigate(`/paku/${id}`); // 특정 id에 대한 페이지로 이동
@@ -30,13 +54,13 @@ function HomeMain() {
     <div className="home-main">
       <section className="header-section">
         <div className="header-image-placeholder">
-          <img src={logoPath}></img>
+          <img src={logoPath} alt="로고" />
         </div>
         <Link to="/signup">
           <div className="profile-placeholder">회원가입</div>
         </Link>
         <Link to="/my">
-          <div className="profile-placeholder">프로필</div>
+          <img src={profilePath} className="profile-placeholder" alt="프로필" />
         </Link>
       </section>
 
@@ -56,16 +80,19 @@ function HomeMain() {
 
       <section className="summary-section">
         <SummaryItem
+          path={visitedIcon}
           iconPlaceholder="아이콘"
           label="다녀온 Paku"
           value={`${userData.visited}곳`}
         />
         <SummaryItem
+          path={noVisitedIcon}
           iconPlaceholder="아이콘"
           label="안가본 Paku"
           value={`${userData.notVisited}곳`}
         />
         <SummaryItem
+          path={badgeIcon}
           iconPlaceholder="아이콘"
           label="나의 배지"
           value={`${userData.badge}개`}
@@ -78,7 +105,7 @@ function HomeMain() {
           {popularPacus.map((paku) => (
             <PopularPakuCard
               key={paku.id}
-              title={paku.title}
+              title={paku.name} // park_detail.json의 name 사용
               description={paku.description}
               id={paku.id}
               onClick={() => detailHandle(paku.id)} // 클릭 핸들러 추가
