@@ -57,7 +57,7 @@ function Map() {
                   <p>{item.name}</p>
                   <p>{item.location}</p>
                   <p>방문 횟수: {item.visits}</p>
-                  <button>ㅇ</button>
+                  <button>😊</button>
                 </div>
               ))
           : // 안 간 Paku 목록
@@ -67,7 +67,7 @@ function Map() {
                 <div className="list-item" key={index}>
                   <p>{item.name}</p>
                   <p>{item.location}</p>
-                  <button>ㅇ</button>
+                  <button>🥲</button>
                 </div>
               ))}
       </div>
