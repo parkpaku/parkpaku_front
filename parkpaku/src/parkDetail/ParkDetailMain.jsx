@@ -49,10 +49,9 @@ function ParkDetailMain({
       try {
         const response = await fetch(`${SERVER_IP}/park/${id}`, {
           method: "GET",
-          headers: new Headers({
+          headers: {
             "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "any",
-          }),
+          },
         });
 
         const contentType = response.headers.get("content-type");

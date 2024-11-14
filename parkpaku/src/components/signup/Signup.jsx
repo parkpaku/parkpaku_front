@@ -29,10 +29,10 @@ function Signup() {
       const SERVER_IP = process.env.REACT_APP_SERVER_IP;
 
       axios
-        .post(`${SERVER_IP}/signup`, userData, {
-          headers: {
-            "Content-Type": "application/json",
-          },
+        .post(`${SERVER_IP}/signup`, {
+          name: "John",
+          memberId: "fff",
+          password: "12345678",
         }) // 백엔드 API URL로 POST 요청
         .then((response) => {
           console.log("회원가입 성공:", response.data);
