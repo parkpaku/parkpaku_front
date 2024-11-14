@@ -43,14 +43,17 @@
   margin-bottom: 8px;
 }
 
+/* colored-area 스타일 */
 .colored-area-placeholder {
-  width: 100%;
-  height: 300px;
-  background-color: #e0e0e0;
-  position: relative;
-  border-radius: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-height: 200px; /* 높이를 제한하여 스크롤을 가능하게 설정 (원하는 높이로 조정) */
+  overflow-y: auto; /* 내용이 넘칠 경우 세로 스크롤이 생기도록 설정 */
+  padding-right: 10px; /* 오른쪽 여백 추가 (스크롤바와의 간격) */
+  padding-top: 20px; /* 영역 위쪽 여백 추가 (스크롤 위로 튀어나가는 부분 조정) */
 }
-
 .colored-area h3 {
   position: absolute;
   top: 16px;
@@ -108,39 +111,37 @@
   display: none;
 }
 
-/* Map.css */
-/* map 영역 스타일 */
+/* map 스타일 */
 #map {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between; /* 항목 간 간격을 자동으로 조정 */
-  gap: 8px; /* 항목 간 간격 */
-  padding: 10px;
+  gap: 10px; /* 각 항목 간의 간격을 설정 */
+  padding-top: 10px;
 }
 
 /* 각 항목 스타일 */
 #map > div {
-  width: 90px; /* 아이콘 크기 */
-  height: 120px; /* 텍스트를 포함한 높이 */
+  width: 80px; /* 각 아이템 너비 */
+  height: 130px; /* 각 아이템 높이 */
   display: flex;
-  flex-direction: column; /* 이미지와 텍스트를 세로로 배치 */
+  flex-direction: column; /* 텍스트와 SVG를 세로로 배치 */
   justify-content: center;
-  align-items: center; /* 아이템 중앙 정렬 */
+  align-items: center;
   text-align: center; /* 텍스트 가운데 정렬 */
 }
 
-/* SVG 아이콘 크기 */
+/* SVG 아이콘 스타일 */
 #map svg {
   width: 100%;
   height: 100%;
 }
 
-/* 구 이름 텍스트 스타일 */
+/* 구 이름 스타일 */
 #map p {
   margin-top: 8px; /* 이미지와 텍스트 간격 */
   font-size: 12px; /* 텍스트 크기 */
-  font-weight: bold; /* 텍스트 두껍게 */
+  font-weight: bold;
   color: #333; /* 텍스트 색상 */
 }
 
@@ -153,9 +154,13 @@
 }
 
 .color-medium {
-  fill: #85964d; /* 중간 색 (주황색) */
+  fill: #85964d; /* 중간 색 */
 }
 
 .color-dark {
-  fill: #707d49; /* 진한 색 (빨간색) */
+  fill: #707d49; /* 진한 색 */
+}
+
+.color-dip-dark {
+  fill: #414e18; /* 가장 진한 색 */
 }
