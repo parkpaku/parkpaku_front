@@ -5,10 +5,12 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
-  border-top: 1px solid #ccc;
+  padding: 20px 0;
+  /* border-top: 1px solid #ccc; */
   background-color: #fff;
   z-index: 1000;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
 }
 
 .bottom-bar-item {
