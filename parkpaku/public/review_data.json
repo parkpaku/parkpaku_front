@@ -2,7 +2,29 @@
   {
     "park_id": 0,
     "author_id": 1,
+    "author_nickname": "HyeongJun",
     "write_date": "2024-11-15",
     "content": "해커톤 너무 피곤하고 졸리네요. 그렇지만 인생에 도움이 되었습니다."
+  },
+  {
+    "park_id": 1,
+    "author_id": 1,
+    "author_nickname": "HyeongJun",
+    "write_date": "2024-11-11",
+    "content": "빼빼로 데이에 산을 걸으니 건강이 좋아지는 것이 느껴지네요."
+  },
+  {
+    "park_id": 0,
+    "author_id": 0,
+    "author_nickname": "Admin",
+    "write_date": "2024-11-11",
+    "content": "저와 함께 동아대학교 S06의 계단을 올라보아요."
+  },
+  {
+    "park_id": 0,
+    "author_id": 3,
+    "author_nickname": "NAJI",
+    "write_date": "2024-11-10",
+    "content": "내일 같이 산 오르실 분"
   }
 ]

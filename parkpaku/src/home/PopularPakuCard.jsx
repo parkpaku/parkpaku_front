@@ -2,8 +2,8 @@ import React from "react";
 import "./PopularPakuCard.css";
 
 import parkImage from "../assets/park_default.jpg";
-import parkImage0 from "../assets/park_0.jpg";
-import parkImage1 from "../assets/park_1.svg";
+import parkImage0 from "../assets/park_1.svg";
+import parkImage1 from "../assets/park_0.jpg";
 
 function PopularPakuCard({ title, description, onClick, id }) {
   // id에 따라 이미지를 선택하는 로직

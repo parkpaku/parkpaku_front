@@ -6,6 +6,8 @@ import parkImage from "../assets/park_default.jpg";
 import parkImage0 from "../assets/park_0.jpg";
 import parkImage1 from "../assets/park_1.svg";
 
+import modalPath from "../assets/detail/il_modal.png";
+
 const SERVER_IP = process.env.REACT_APP_SERVER_IP;
 
 function ParkDetailMain({
@@ -23,12 +25,14 @@ function ParkDetailMain({
     longitude: "",
     likes: "",
   });
+  const [reviews, setReviews] = useState([]); // 리뷰 데이터를 저장할 상태 추가
   const [userLocation, setUserLocation] = useState({
     latitude: null,
     longitude: null,
   });
   const [isVerifying, setIsVerifying] = useState(false); // 인증 중 상태
   const [verificationMessage, setVerificationMessage] = useState(""); // 인증 결과 메시지
+  const [veriTitle, setVeriTitle] = useState(""); // 인증 결과 메시지
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -54,14 +58,11 @@ function ParkDetailMain({
           },
         });
 
-        // console.log("response:", response);
-
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        // id 값에 따라 데이터를 필터링
         const selectedPark = data.find((park) => park.id === Number(id));
         if (selectedPark) {
           setParkData(selectedPark);
@@ -75,6 +76,37 @@ function ParkDetailMain({
 
     if (id) {
       fetchParkData(); // id가 있을 경우 데이터 가져오기
+    }
+  }, [id]);
+
+  // 리뷰 데이터를 가져오는 useEffect 추가
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch("/review_data.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        // 현재 페이지의 id와 review의 park_id가 같은 리뷰만 필터링
+        const filteredReviews = data.filter(
+          (review) => review.park_id === Number(id)
+        );
+        setReviews(filteredReviews);
+      } catch (error) {
+        console.error("리뷰 데이터를 가져오는 중 에러 발생:", error);
+      }
+    };
+
+    if (id) {
+      fetchReviews(); // id가 있을 경우 리뷰 데이터 가져오기
     }
   }, [id]);
 
@@ -93,7 +125,8 @@ function ParkDetailMain({
   const getLocation = () => {
     if (navigator.geolocation) {
       setIsVerifying(true); // 인증 중 상태
-      setVerificationMessage("인증 중이에요\n잠시만 기다려주세요...");
+      setVeriTitle("인증 중이에요");
+      setVerificationMessage("잠시만 기다려주세요...");
 
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -126,12 +159,13 @@ function ParkDetailMain({
     );
 
     setIsVerifying(false);
-    console.log("distance (km 단위):", distance);
     if (distance <= 1.5) {
       // 예: 1.5km 이내
-      setVerificationMessage("최고예요!\n다녀온 Paku 수가 늘었어요");
+      setVeriTitle("최고예요!");
+      setVerificationMessage("다녀온 Paku 수가 늘었어요!");
     } else {
-      setVerificationMessage("현재 위치가 해당 위치와 멀리 떨어져 있습니다.");
+      setVeriTitle("ㅠㅠ");
+      setVerificationMessage("현재 위치가 이 위치에 있지 않습니다.");
     }
   };
 
@@ -164,9 +198,6 @@ function ParkDetailMain({
         <h4>{parkData.type}</h4>
         <p className="park-info-name">{parkData.name}</p>
         <p className="park-info-des">{parkData.description}</p>
-        {/* <p className="park-info-des">
-          위도: {parkData.latitude} | 경도: {parkData.longitude}
-        </p> */}
       </div>
 
       <div className="tags-container">
@@ -191,21 +222,31 @@ function ParkDetailMain({
       <button className="check-button" onClick={getLocation}>
         <span className="check-button-title">Paku 인증</span>
         <span className="check-button-subtext">
-          지금 공원에 있다면 인증해보세요
+          공원에 있다면, 다녀온 Paku에 추가해보세요!
         </span>
       </button>
 
       {(isVerifying || verificationMessage) && (
         <div className="verification-modal">
           <div className="modal-content">
+            <div className="modal-image-container">
+              <img src={modalPath} alt="팝업 이미지" className="modal-image" />
+            </div>
+            <h2>{veriTitle}</h2>
             <p>{verificationMessage}</p>
-            {!isVerifying && verificationMessage.includes("최고예요") && (
-              <button onClick={() => setVerificationMessage("")}>
+            {!isVerifying && verificationMessage.includes("Paku") && (
+              <button
+                className="green-button"
+                onClick={() => setVerificationMessage("")}
+              >
                 네, 좋아요.
               </button>
             )}
             {!isVerifying && verificationMessage.includes("현재") && (
-              <button onClick={() => setVerificationMessage("")}>
+              <button
+                className="green-button"
+                onClick={() => setVerificationMessage("")}
+              >
                 확인했어요.
               </button>
             )}
@@ -219,27 +260,16 @@ function ParkDetailMain({
 
       <section className="popular-review">
         <h3>최신 후기</h3>
-        <div className="review-card">
-          <p>
-            오늘 아침에 같이 산책겸 생태공원에 왔어요. 여기에 오늘 보니깐
-            이벤트가 있..
-          </p>
-          <p>태연맘 | 24.11.14</p>
-        </div>
-        <div className="review-card">
-          <p>
-            오늘 아침에 같이 산책겸 생태공원에 왔어요. 여기에 오늘 보니깐
-            이벤트가 있..
-          </p>
-          <p>태연맘 | 24.11.14</p>
-        </div>
-        <div className="review-card">
-          <p>
-            오늘 아침에 같이 산책겸 생태공원에 왔어요. 여기에 오늘 보니깐
-            이벤트가 있..
-          </p>
-          <p>태연맘 | 24.11.14</p>
-        </div>
+        {reviews.length > 0 ? (
+          reviews.map((review, index) => (
+            <div key={index} className="review-card">
+              <p>{review.content}</p>
+              <p>{`작성자: ${review.author_nickname} | 작성일: ${review.write_date}`}</p>
+            </div>
+          ))
+        ) : (
+          <p>현재 등록된 후기가 없습니다.</p>
+        )}
       </section>
 
       <div className="location-info">
