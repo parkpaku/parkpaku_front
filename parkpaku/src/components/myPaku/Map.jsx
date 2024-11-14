@@ -90,7 +90,7 @@ function Map() {
   return (
     <div className="map">
       <div>
-        <Link to="/" className="back">
+        <Link to="/home" className="back">
           ◀이전
         </Link>
         <h1>나의 Paku</h1>
