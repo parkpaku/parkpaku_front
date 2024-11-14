@@ -8,6 +8,8 @@ function SignupName({ onNext }) {
   const handleSubmit = () => {
     if (name && nickname) {
       onNext({ name, nickname }); // 이름과 닉네임을 부모로 전달
+    } else {
+      alert("이름과 닉네임을 모두 입력해주세요."); // 유효성 검사
     }
   };
 
@@ -23,7 +25,7 @@ function SignupName({ onNext }) {
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="ex.홍길동"
+          placeholder="홍길동"
         />
         <small>
           <span className="tip-text">TIP! </span> 실명이 입력되어 있는지
@@ -44,7 +46,7 @@ function SignupName({ onNext }) {
 
       <button
         className={`signup-button ${name && nickname ? "active" : ""}`} // 이름과 닉네임이 입력되면 버튼 활성화
-        onClick={handleSubmit}
+        onClick={handleSubmit} // 다음 버튼 클릭 시 부모로 전달
         disabled={!name || !nickname} // 둘 중 하나라도 없으면 비활성화
       >
         다음

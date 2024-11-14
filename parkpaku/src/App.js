@@ -20,7 +20,7 @@ function App() {
             <Route path="/paku/:id" element={<PakuDetail />} />
           </Routes>
         </main>
-        <BottomBar />
+        {/*<BottomBar />*/}
       </div>
     </Router>
   );

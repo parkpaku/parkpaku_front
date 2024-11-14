@@ -6,10 +6,8 @@
   align-items: center;
   padding: 20px;
   min-height: 100vh;
-  height: 100%; /* 화면을 꽉 채우도록 설정 */
   box-sizing: border-box;
-  margin-left: 10px;
-  margin-top: 50px;
+  padding-top: 68px;
 }
 
 /* "만나서 반가워요 본인의 정보를 입력해주세요" 위치 조정 */
@@ -18,7 +16,7 @@
   font-weight: bold;
   color: #333;
   margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 0px !important;
   text-align: left;
   width: 100%;
 }
@@ -74,12 +72,18 @@
 }
 
 /* 드롭다운 스타일 */
-select {
+.select-group select {
   cursor: pointer;
   font-size: 16px;
   padding: 12px;
-  border-radius: 8px;
   border: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-group select:hover {
+  border-color: #3b3b3b; /* hover 시 border 색상 변경 */
+  background-color: #f0f0f0; /* hover 시 배경 색상 변경 */
 }
 
 /* 버튼 스타일 */
@@ -92,8 +96,7 @@ select {
   border: none;
   border-radius: 18px;
   cursor: not-allowed;
-  margin-top: 20px;
-  margin-bottom: 10;
+  margin-top: auto;
   transition: background-color 0.3s ease;
 }
 
@@ -106,6 +109,11 @@ select {
   background-color: #5a5a5a; /* 버튼 hover 시 색상 */
 }
 
+/* 하단 버튼 위치 */
+.signup-button {
+  margin-bottom: 30px;
+}
+
 /* 각 페이지의 최소 높이를 확보 */
 .signup-form-container > * {
   margin-bottom: 20px;
@@ -115,4 +123,32 @@ select {
 .tip-text {
   color: #db5e43; /* 빨간색 */
   font-weight: bold; /* 강조를 위해 굵게 */
+}
+
+/* 이전 버튼 스타일 */
+.back-button {
+  position: absolute;
+  top: 20px; /* 화면 상단에 위치 */
+  left: 20px; /* 화면 왼쪽에 위치 */
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.back-button:hover {
+  color: #888; /* hover 시 색상 변화 */
+}
+
+/* 에러 메시지 스타일 */
+.error-text {
+  color: #db5e43; /* 빨간색 */
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
 }
