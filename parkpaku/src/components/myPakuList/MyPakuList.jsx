@@ -21,7 +21,7 @@ function Map() {
   }, []);
 
   const handleItemClick = (id) => {
-    navigate(`/parkDetail/${id}`); // 상세 페이지로 이동 (id를 URL에 포함)
+    navigate(`/paku/${id}`); // 상세 페이지로 이동 (id를 URL에 포함)
   };
 
   return (
@@ -58,7 +58,11 @@ function Map() {
             items
               .filter((item) => item.visits > 0) // 방문 횟수가 0보다 큰 아이템만 필터링
               .map((item, index) => (
-                <div className="list-item" key={index}>
+                <div
+                  className="list-item"
+                  key={index}
+                  onClick={() => handleItemClick(item.id)} // 클릭 시 상세 페이지로 이동
+                >
                   <p>{item.name}</p>
                   <p>{item.location}</p>
                   <p>방문 횟수: {item.visits}</p>
@@ -69,7 +73,11 @@ function Map() {
             items
               .filter((item) => item.visits === 0) // 방문 횟수가 0인 아이템만 필터링
               .map((item, index) => (
-                <div className="list-item" key={index}>
+                <div
+                  className="list-item"
+                  key={index}
+                  onClick={() => handleItemClick(item.id)} // 클릭 시 상세 페이지로 이동
+                >
                   <p>{item.name}</p>
                   <p>{item.location}</p>
                   <button>🥲</button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import "./ParkDetailMain.css";
 
 import parkImage from "../assets/park_default.jpg";
@@ -188,8 +188,9 @@ function ParkDetailMain({
 
   return (
     <div className="park-detail-main">
-      <button className="back-button">이전</button>
-
+      <Link to="/home" className="back">
+        ◀이전
+      </Link>
       <div className="image-placeholder">
         <img src={parkImage} alt="공원 이미지" />
       </div>

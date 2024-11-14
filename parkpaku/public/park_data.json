@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "삼락 생태공원",
     "location": "사상구",
     "visits": 12
@@ -15,6 +16,7 @@
     "visits": 5
   },
   {
+    "id": 2,
     "name": "에덴공원",
     "location": "사상구",
     "visits": 0
