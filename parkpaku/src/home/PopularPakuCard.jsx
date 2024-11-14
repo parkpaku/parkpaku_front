@@ -1,13 +1,14 @@
 import React from "react";
 import "./PopularPakuCard.css";
-import logo from "../assets/reactlogo.png";
 
-function PopularPacuCard({ title, description }) {
+function PopularPakuCard({ title, description, onClick }) {
   return (
-    <div className="popular-pacu-card">
-      <div className="card-image-placeholder">
-        <img src={logo} alt="사진"></img>
-      </div>
+    <div
+      className="popular-paku-card"
+      onClick={onClick}
+      style={{ cursor: "pointer" }}
+    >
+      <div className="card-image-placeholder">{/* 이미지 예시 */}</div>
       <div className="card-info">
         <h4>{title}</h4>
         <p>{description}</p>
@@ -16,4 +17,4 @@ function PopularPacuCard({ title, description }) {
   );
 }
 
-export default PopularPacuCard;
+export default PopularPakuCard;

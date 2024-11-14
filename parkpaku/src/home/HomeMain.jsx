@@ -1,16 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // React Router v6에서 useNavigate 사용
 import PopularPakuCard from "./PopularPakuCard";
 import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
 
 function HomeMain() {
+  const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
+
   const popularPacus = [
-    { title: "Paku 1", description: "인기있는 Paku 1 설명" },
-    { title: "Paku 2", description: "인기있는 Paku 2 설명" },
-    { title: "Paku 3", description: "인기있는 Paku 3 설명" },
-    { title: "Paku 4", description: "인기있는 Paku 4 설명" },
+    { id: 1, title: "Paku 1", description: "인기있는 Paku 1 설명" },
+    { id: 2, title: "Paku 2", description: "인기있는 Paku 2 설명" },
+    { id: 3, title: "Paku 3", description: "인기있는 Paku 3 설명" },
+    { id: 4, title: "Paku 4", description: "인기있는 Paku 4 설명" },
   ];
+
+  const detailHandle = (id) => {
+    navigate(`/paku/${id}`); // 특정 id에 대한 페이지로 이동
+  };
 
   return (
     <div className="home-main">
@@ -52,11 +58,12 @@ function HomeMain() {
       <section className="popular-section">
         <h3>인기있는 Paku</h3>
         <div className="popular-paku-scroll-container">
-          {popularPacus.map((paku, index) => (
+          {popularPacus.map((paku) => (
             <PopularPakuCard
-              key={index}
+              key={paku.id}
               title={paku.title}
               description={paku.description}
+              onClick={() => detailHandle(paku.id)} // 클릭 핸들러 추가
             />
           ))}
         </div>
