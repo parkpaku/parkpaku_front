@@ -7,6 +7,8 @@ import BottomSheet from "./BottomSheet";
 function Map() {
   const mapRef = useRef(null);
   const { naver } = window;
+  const [items, setItems] = useState([]);
+  const [modalOpen, setModalOpen] = useState(true);
 
   useEffect(() => {
     if (!window.naver || !window.naver.maps) {
@@ -17,7 +19,7 @@ function Map() {
     // 네이버 지도 옵션 선택
     const mapOptions = {
       // 지도의 초기 중심 좌표
-      center: new naver.maps.LatLng(37.5666103, 126.9783882),
+      center: new naver.maps.LatLng(35.1681608, 129.0573853),
       logoControl: false, // 네이버 로고 표시 X
       mapDataControl: false, // 지도 데이터 저작권 컨트롤 표시 X
       scaleControl: true, // 지도 축척 컨트롤의 표시 여부
@@ -27,13 +29,17 @@ function Map() {
       zoomControlOptions: { position: 9 }, // 줌 컨트롤 우하단에 배치
     };
     mapRef.current = new naver.maps.Map("map", mapOptions);
-  }, []);
 
-  const [modalOpen, setModalOpen] = useState(true);
-  const items = [
-    { name: "삼락 생태공원", location: "부산 사상구", visits: 3 },
-    // 추가 아이템 데이터...
-  ];
+    // JSON 파일을 fetch로 불러와서 상태에 저장
+    fetch("/park_data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setItems(data); // 불러온 데이터를 items 상태에 저장
+      })
+      .catch((error) => {
+        console.error("Error loading JSON:", error);
+      });
+  }, []);
 
   return (
     <div className="map">
