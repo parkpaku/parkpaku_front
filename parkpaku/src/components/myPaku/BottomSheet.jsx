@@ -1,8 +1,8 @@
-import React, {useRef, useState} from 'react';
-import './BottomSheet.css';
+import React, { useRef, useState } from "react";
+import "./BottomSheet.css";
 
 function BottomSheet() {
-    const [position, setPosition] = useState(0); // 초기 위치 설정
+  const [position, setPosition] = useState(0); // 초기 위치 설정
   const sheetRef = useRef(null);
   const startY = useRef(0);
   const isDragging = useRef(false);
@@ -17,20 +17,19 @@ function BottomSheet() {
     if (!isDragging.current) return;
     const currentY = e.touches[0].clientY;
     setDeltaY(currentY - startY.current);
-};
+  };
 
-const handleTouchEnd = () => {
+  const handleTouchEnd = () => {
     isDragging.current = false;
     // 조건에 따라 바텀시트를 닫거나 열도록 설정
     if (deltaY < 0) {
-        setPosition(-500); // 20% 높이에 위치
-        console.log("deltaY 음수");
-        console.log("position:", position);
-      } else {
-        setPosition(0); // 초기 위치로 복귀
-      }
-    };
-
+      setPosition(-500); // 20% 높이에 위치
+      console.log("deltaY 음수");
+      console.log("position:", position);
+    } else {
+      setPosition(0); // 초기 위치로 복귀
+    }
+  };
 
   return (
     <div
