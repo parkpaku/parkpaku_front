@@ -7,6 +7,7 @@ function BottomSheet() {
   const startY = useRef(0);
   const isDragging = useRef(false);
   const [deltaY, setDeltaY] = useState(0);
+  const [activeTab, setActiveTab] = useState("visited"); // 현재 활성화된 탭
 
   const handleTouchStart = (e) => {
     startY.current = e.touches[0].clientY;
@@ -24,8 +25,6 @@ function BottomSheet() {
     // 조건에 따라 바텀시트를 닫거나 열도록 설정
     if (deltaY < 0) {
       setPosition(-500); // 20% 높이에 위치
-      console.log("deltaY 음수");
-      console.log("position:", position);
     } else {
       setPosition(0); // 초기 위치로 복귀
     }
@@ -42,15 +41,41 @@ function BottomSheet() {
     >
       <div className="handle-bar" />
       <div className="tabs">
-        <div className="tab active">다녀온 Paku</div>
-        <div className="tab">안가본 Paku</div>
+        <div
+          className={`tab ${activeTab === "visited" ? "active" : "inactive"}`}
+          onClick={(e) => {
+            e.stopPropagation(); // 이벤트 전파 중단
+            setActiveTab("visited");
+          }}
+        >
+          다녀온 Paku
+        </div>
+        <div
+          className={`tab ${
+            activeTab === "notVisited" ? "active" : "inactive"
+          }`}
+          onClick={(e) => {
+            e.stopPropagation(); // 이벤트 전파 중단
+            setActiveTab("notVisited");
+          }}
+        >
+          안가본 Paku
+        </div>
       </div>
       <div className="list">
-        <div className="list-item">
-          <p>삼락 생태공원</p>
-          <p>부산 사상구</p>
-          <button>-</button>
-        </div>
+        {activeTab === "visited" ? (
+          <div className="list-item">
+            <p>삼락 생태공원</p>
+            <p>부산 사상구</p>
+            <button>ㅇ</button>
+          </div>
+        ) : (
+          <div className="list-item">
+            <p>해운대 해수욕장</p>
+            <p>부산 해운대구</p>
+            <button>ㅇ</button>
+          </div>
+        )}
       </div>
     </div>
   );
