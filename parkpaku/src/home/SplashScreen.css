@@ -1,0 +1,9 @@
+.splash-screen img {
+  width: 100%; /* 부모 요소의 너비에 맞춰 이미지 크기 조정 */
+  height: 80%; /* 비율에 맞게 자동으로 높이 설정 */
+}
+
+/* SplashScreen 페이지에서 바텀탭 숨기기 */
+.splash-screen .bottom-tab {
+  display: none;
+}
