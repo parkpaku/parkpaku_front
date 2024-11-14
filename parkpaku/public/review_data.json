@@ -26,5 +26,40 @@
     "author_nickname": "Majin",
     "write_date": "2024-11-10",
     "content": "저 핫식스 처음 먹어요..."
+  },
+  {
+    "park_id": 2,
+    "author_id": 2,
+    "author_nickname": "Majin",
+    "write_date": "2024-11-10",
+    "content": "뉴턴 공원은 정말 많은 인원이 들어갈 수 있어서 피크닉 하기도 좋고, 왜 동아대 대표 공원인 지 알 것 같네요! 도서관 학식 맛있어요."
+  },
+  {
+    "park_id": 2,
+    "author_id": 1,
+    "author_nickname": "HyeongJun",
+    "write_date": "2024-11-09",
+    "content": "저녁에 가면 멋진 분수와 폭죽..까지는 없지만, 늦은 밤 공기를 마시며 걷는 기분이 아주 좋아요! 저녁 시간대 추천"
+  },
+  {
+    "park_id": 2,
+    "author_id": 1,
+    "author_nickname": "NAJI",
+    "write_date": "2024-11-07",
+    "content": "뉴턴공원은 참.. 시원한 공간입니다."
+  },
+  {
+    "park_id": 2,
+    "author_id": 1,
+    "author_nickname": "HaeYeon",
+    "write_date": "2024-11-02",
+    "content": "접근성이 안 좋은 것 같아요."
+  },
+  {
+    "park_id": 2,
+    "author_id": 1,
+    "author_nickname": "HyeongJun",
+    "write_date": "2024-10-21",
+    "content": "나무 앞에 가만히 앉아, 위에서 떨어지는 사과를 맞으며 명상에 젖어있다보면, 시간 가는 줄 모릅니다."
   }
 ]
