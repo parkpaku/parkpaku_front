@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import park0Image from "../assets/park_0.jpg";
+import parkDefaultImage from "../assets/park_default.jpg";
 
 function ReviewMap() {
   const mapRef = useRef(null);
@@ -12,7 +14,7 @@ function ReviewMap() {
 
     // 지도 초기화 옵션
     const mapOptions = {
-      center: new naver.maps.LatLng(35.1681608, 129.0573853),
+      center: new naver.maps.LatLng(35.1047846, 129.0190933),
       logoControl: false,
       mapDataControl: false,
       scaleControl: true,
@@ -28,29 +30,33 @@ function ReviewMap() {
     // 마커 데이터 예시 (위도, 경도, 사진 URL)
     const markerData = [
       {
-        position: new naver.maps.LatLng(35.1681608, 129.0573853),
-        image: "https://via.placeholder.com/150?text=1", // 이미지 URL
+        position: new naver.maps.LatLng(35.1047846, 129.0190933),
+        image: park0Image, // import한 이미지 사용
       },
       {
-        position: new naver.maps.LatLng(35.1701608, 129.0603853),
-        image: "https://via.placeholder.com/150?text=2", // 이미지 URL
+        position: new naver.maps.LatLng(35.1317807, 128.9853735),
+        image: parkDefaultImage, // import한 이미지 사용
+      },
+      {
+        position: new naver.maps.LatLng(35.1090608, 128.9632928),
+        image: parkDefaultImage, // import한 이미지 사용
+      },
+      {
+        position: new naver.maps.LatLng(35.1037833, 128.9430727),
+        image: parkDefaultImage, // import한 이미지 사용
       },
     ];
 
-    // 마커 및 클릭 이벤트 추가
+    // 마커 및 이미지 추가
     markerData.forEach((data) => {
       const marker = new naver.maps.Marker({
         position: data.position,
         map: mapRef.current,
-      });
-
-      // 마커 클릭 시 사진을 보여주는 이벤트 추가
-      naver.maps.Event.addListener(marker, "click", () => {
-        const infowindow = new naver.maps.InfoWindow({
-          content: `<img src="${data.image}" alt="image" width="200" />`, // 클릭 시 보여줄 이미지
-        });
-
-        infowindow.open(mapRef.current, marker);
+        icon: {
+          content: `<img src="${data.image}" width="60" height="60" style="border-radius: 50%;" />`, // 마커에 이미지를 삽입하고 크기 조정
+          size: new naver.maps.Size(60, 60), // 마커 크기 설정
+          anchor: new naver.maps.Point(30, 30), // 마커 중앙을 위치에 맞춤
+        },
       });
     });
   }, []);
