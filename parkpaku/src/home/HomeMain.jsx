@@ -12,14 +12,13 @@ import noVisitedIcon from "../assets/home/ic_noVisitedPaku.png";
 
 function HomeMain() {
   const [popularPacus, setPopularPacus] = useState([]);
+  const [userData, setUserData] = useState({
+    visited: 0,
+    notVisited: 0,
+    badge: 0,
+    todayVisit: 0,
+  });
   const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
-
-  const userData = {
-    visited: 24,
-    notVisited: 256,
-    badge: 7,
-    todayVisit: 2,
-  };
 
   // park_detail.json에서 데이터를 가져오는 useEffect
   useEffect(() => {
@@ -44,6 +43,42 @@ function HomeMain() {
     };
 
     fetchPopularPacus();
+  }, []);
+
+  // user_info.json에서 데이터를 가져와서 userData에 설정하는 useEffect
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/user_info.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        // ID가 2인 사용자의 데이터를 찾음
+        const selectedUser = data.find((user) => user.id === 2);
+        if (selectedUser) {
+          setUserData({
+            visited: selectedUser.visited,
+            notVisited: selectedUser.notVisited,
+            badge: selectedUser.badge,
+            todayVisit: selectedUser.todayVisit,
+          });
+        } else {
+          console.error("ID가 2인 사용자의 데이터를 찾을 수 없습니다.");
+        }
+      } catch (error) {
+        console.error("사용자 데이터를 가져오는 중 에러 발생:", error);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const detailHandle = (id) => {
