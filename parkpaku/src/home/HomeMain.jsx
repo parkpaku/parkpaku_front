@@ -186,7 +186,10 @@ function HomeMain() {
       </h2>
 
       <section className="colored-area">
-        <Link to="/myPaku" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link
+          to="/myPakuList"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
           <div className="colored-area-placeholder">
             <div
               id="map"

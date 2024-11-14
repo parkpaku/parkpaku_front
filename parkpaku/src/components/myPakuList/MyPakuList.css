@@ -1,3 +1,18 @@
+#map {
+  width: 98.5%;
+  height: 50vh; /* 원하는 높이로 설정 */
+  border-radius: 18px;
+}
+
+.back {
+  text-decoration: none;
+  color: black;
+}
+
+.map {
+  margin: 10px;
+}
+
 .sliding-bottom-sheet {
   position: fixed;
   margin: 5px;
