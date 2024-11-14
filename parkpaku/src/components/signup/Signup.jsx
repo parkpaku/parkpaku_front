@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import SignupName from "./SignupName";
-import SignupPassword from "./SignupPassword";
-import SignupRegion from "./SignupRegion";
+import SignupName from "./SignupName.jsx";
+import SignupPassword from "./SignupPassword.jsx";
+import SignupRegion from "./SignupRegion.jsx";
 
 function Signup() {
   const [step, setStep] = useState(1); // 현재 단계 (1: 이름, 2: 비밀번호, 3: 지역)

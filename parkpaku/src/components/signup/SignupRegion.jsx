@@ -12,20 +12,28 @@ function SignupRegion({ onNext }) {
 
   return (
     <div className="form-container">
-      <h1>거주하고 있는 지역을 알려주세요</h1>
+      <h1>거주하고 있는 구를 알려주세요</h1>
 
       <div className="input-group">
-        <label htmlFor="region">지역</label>
+        <label htmlFor="region">구</label>
         <select
           id="region"
           value={region}
           onChange={(e) => setRegion(e.target.value)}
         >
           <option value="">선택하세요</option>
-          <option value="busan">부산</option>
-          <option value="seoul">서울</option>
-          <option value="incheon">인천</option>
-          {/* 지역 추가 가능 */}
+          <option value="busan">사하구</option>
+          <option value="seoul">동래구</option>
+          <option value="incheon">부산진구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
+          <option value="incheon">남구</option>
         </select>
       </div>
 
