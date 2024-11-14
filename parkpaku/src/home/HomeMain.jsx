@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom"; // React Router v6에서 useNavigate 사용
+import { useNavigate, Link } from "react-router-dom";
 import PopularPakuCard from "./PopularPakuCard";
 import SummaryItem from "./SummaryItem";
 import "./HomeMain.css";
@@ -8,11 +8,18 @@ function HomeMain() {
   const navigate = useNavigate(); // 네비게이션을 위한 useNavigate 훅
 
   const popularPacus = [
-    { id: 1, title: "Paku 1", description: "인기있는 Paku 1 설명" },
+    { id: 1, title: "삼락 생태공원", description: "인기있는 Paku 1 설명" },
     { id: 2, title: "Paku 2", description: "인기있는 Paku 2 설명" },
     { id: 3, title: "Paku 3", description: "인기있는 Paku 3 설명" },
     { id: 4, title: "Paku 4", description: "인기있는 Paku 4 설명" },
   ];
+
+  const userData = {
+    visited: 24,
+    notVisited: 256,
+    badge: 7,
+    todayVisit: 2,
+  };
 
   const detailHandle = (id) => {
     navigate(`/paku/${id}`); // 특정 id에 대한 페이지로 이동
@@ -30,7 +37,7 @@ function HomeMain() {
       <h2>
         오늘은
         <br />
-        1곳의 Paku를 다녀왔어요
+        {userData.todayVisit}곳의 Paku를 다녀왔어요
       </h2>
 
       <section className="colored-area">
@@ -45,14 +52,18 @@ function HomeMain() {
         <SummaryItem
           iconPlaceholder="아이콘"
           label="다녀온 Paku"
-          value="44곳"
+          value={`${userData.visited}곳`}
         />
         <SummaryItem
           iconPlaceholder="아이콘"
           label="안가본 Paku"
-          value="256곳"
+          value={`${userData.notVisited}곳`}
         />
-        <SummaryItem iconPlaceholder="아이콘" label="나의 배지" value="12개" />
+        <SummaryItem
+          iconPlaceholder="아이콘"
+          label="나의 배지"
+          value={`${userData.badge}개`}
+        />
       </section>
 
       <section className="popular-section">

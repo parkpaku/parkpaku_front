@@ -1,6 +1,8 @@
 import React from "react";
 import "./PopularPakuCard.css";
 
+import parkImage from "../assets/park_1.jpg";
+
 function PopularPakuCard({ title, description, onClick }) {
   return (
     <div
@@ -8,10 +10,12 @@ function PopularPakuCard({ title, description, onClick }) {
       onClick={onClick}
       style={{ cursor: "pointer" }}
     >
-      <div className="card-image-placeholder">{/* 이미지 예시 */}</div>
+      <div className="card-image-placeholder">
+        <img src={parkImage} alt="img"></img>
+      </div>
       <div className="card-info">
-        <h4>{title}</h4>
-        <p>{description}</p>
+        <p className="card-info-title">{title}</p>
+        <p className="card-info-description">{description}</p>
       </div>
     </div>
   );

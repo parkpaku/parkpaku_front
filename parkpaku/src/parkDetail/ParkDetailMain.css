@@ -43,7 +43,7 @@
   display: flex;
   justify-content: space-between;
   margin: 16px 0;
-  height: 85px;
+  height: 65px;
 }
 
 .like-counter,
@@ -58,10 +58,12 @@
 .like-counter-label,
 .visit-counter-label {
   font-size: 12px;
+  margin-bottom: 0px;
 }
 
 .like-counter-value,
 .visit-counter-value {
+  margin: 0px;
   font-size: 18px;
   font-weight: bold;
 }

@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import "./ParkDetailMain.css";
+import parkImage from "../assets/park_1.jpg";
 
 function ParkDetailMain({
-  parkName = "삼락 생태공원",
-  parkType = "생태공원",
-  parkDescription = "다양한 스포츠를 즐길 수 있는 공원",
-  likes = 24,
   visitCount = 2,
   tags = ["스케이트 보드", "자전거", "갈대밭"],
-  location = "부산광역시 사상구 삼락동 686",
 }) {
   const [copyMessage, setCopyMessage] = useState("");
 
+  const parkData = {
+    name: "삼락 생태공원",
+    description: "다양한 스포츠를 즐길 수 있는 공원",
+    type: "생태공원",
+    like: 24,
+    location: "부산광역시 사상구 삼락동 686",
+  };
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(location).then(() => {
+    navigator.clipboard.writeText(parkData.location).then(() => {
       setCopyMessage("클립보드에 복사되었습니다.");
       setTimeout(() => setCopyMessage(""), 2000); // 2초 후 메시지 지우기
     });
@@ -24,19 +28,19 @@ function ParkDetailMain({
       <button className="back-button">이전</button>
 
       <div className="image-placeholder">
-        <img src="/path/to/your/image.png" alt="공원 이미지" />
+        <img src={parkImage} alt="공원 이미지" /> {/* 수정된 이미지 소스 */}
       </div>
 
       <div className="park-info">
-        <h4>{parkType}</h4>
-        <p className="park-info-name">{parkName}</p>
-        <p className="park-info-des">{parkDescription}</p>
+        <h4>{parkData.type}</h4>
+        <p className="park-info-name">{parkData.name}</p>
+        <p className="park-info-des">{parkData.description}</p>
       </div>
 
       <div className="like-count-container">
         <div className="like-counter">
           <p className="like-counter-label">좋아요</p>
-          <p className="like-counter-value">{likes}</p>
+          <p className="like-counter-value">{parkData.like}</p>
         </div>
         <div className="visit-counter">
           <p className="visit-counter-label">가본 횟수</p>
@@ -72,7 +76,7 @@ function ParkDetailMain({
         <h4>위치 정보</h4>
         <div className="map-placeholder">구글지도</div>
         <div className="location-copy-container">
-          <p>{location}</p>
+          <p>{parkData.location}</p>
           <button className="copy-button" onClick={handleCopy}>
             복사하기
           </button>
