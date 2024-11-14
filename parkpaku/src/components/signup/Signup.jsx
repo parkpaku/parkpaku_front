@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import SignupName from "./SignupName.jsx";
 import SignupPassword from "./SignupPassword.jsx";
 import SignupRegion from "./SignupRegion.jsx";
@@ -21,9 +22,21 @@ function Signup() {
     } else if (step === 3) {
       console.log("data:", data);
       setRegion(data);
-      setName(name);
-      console.log("회원가입 완료:", { name, nickname, password, region });
+      console.log("회원가입 완료:", { name, nickname, password, region: data });
+
       // 회원가입 완료 후 추가적인 동작 (예: API 요청 등)
+      const userData = { name, nickname, password, region: data };
+
+      axios
+        .post("https://localhost:3000/signup", userData) // 백엔드 API URL로 POST 요청
+        .then((response) => {
+          console.log("회원가입 성공:", response.data);
+          // 성공적인 응답 후 추가적인 동작 (예: 홈 페이지로 리디렉션)
+        })
+        .catch((error) => {
+          console.error("회원가입 실패:", error);
+          // 실패 시 처리 (예: 에러 메시지 표시)
+        });
     }
   };
 
