@@ -11,7 +11,7 @@ function BottomBar() {
   return (
     <nav className="bottom-bar">
       <Link to="/home" className="bottom-bar-item">
-        <AiFillHome size={24} />
+        <img src={homeIcon} className="bottom-bar-icon" />
         <span>홈</span>
       </Link>
       <Link to="/myPakuList" className="bottom-bar-item">
@@ -20,7 +20,7 @@ function BottomBar() {
       </Link>
       <Link to="/profile" className="bottom-bar-item">
         <img src={myPakuIcon} className="bottom-bar-icon" />
-        <span>내정보</span>
+        <span>더보기</span>
       </Link>
     </nav>
   );

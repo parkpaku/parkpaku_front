@@ -10,10 +10,7 @@ import modalPath from "../assets/detail/il_modal.png";
 
 const SERVER_IP = process.env.REACT_APP_SERVER_IP;
 
-function ParkDetailMain({
-  visitCount = 2,
-  tags = ["스케이트 보드", "자전거", "갈대밭"],
-}) {
+function ParkDetailMain({ tags = ["스케이트 보드", "자전거", "갈대밭"] }) {
   const [copyMessage, setCopyMessage] = useState("");
   const [parkData, setParkData] = useState({
     id: "",
@@ -25,26 +22,26 @@ function ParkDetailMain({
     longitude: "",
     likes: "",
   });
-  const [reviews, setReviews] = useState([]); // 리뷰 데이터를 저장할 상태 추가
+  const [visited, setVisited] = useState(0); // 가본 횟수를 저장할 상태 추가
+  const [reviews, setReviews] = useState([]);
   const [userLocation, setUserLocation] = useState({
     latitude: null,
     longitude: null,
   });
-  const [isVerifying, setIsVerifying] = useState(false); // 인증 중 상태
-  const [verificationMessage, setVerificationMessage] = useState(""); // 인증 결과 메시지
-  const [veriTitle, setVeriTitle] = useState(""); // 인증 결과 메시지
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [verificationMessage, setVerificationMessage] = useState("");
+  const [veriTitle, setVeriTitle] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
   const selectImage = (id) => {
-    console.log("id:", id);
     switch (id) {
       case 0:
         return parkImage0;
       case 1:
         return parkImage1;
       default:
-        return parkImage; // 기본 이미지
+        return parkImage;
     }
   };
 
@@ -75,7 +72,38 @@ function ParkDetailMain({
     };
 
     if (id) {
-      fetchParkData(); // id가 있을 경우 데이터 가져오기
+      fetchParkData();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const fetchVisitsData = async () => {
+      try {
+        const response = await fetch("/park_data.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const selectedPark = data.find((park) => park.id === Number(id));
+        if (selectedPark) {
+          setVisited(selectedPark.visits); // 가본 횟수를 설정
+        } else {
+          console.error("해당 id에 대한 방문 데이터를 찾을 수 없습니다.");
+        }
+      } catch (error) {
+        console.error("방문 데이터를 가져오는 중 에러 발생:", error);
+      }
+    };
+
+    if (id) {
+      fetchVisitsData();
     }
   }, [id]);
 
@@ -215,8 +243,9 @@ function ParkDetailMain({
           <p className="like-counter-value">{parkData.likes}</p>
         </div>
         <div className="visit-counter">
-          <p className="visit-counter-label">가본 횟수</p>
-          <p className="visit-counter-value">{visitCount}</p>
+          <p className="visit-counter-label">방문 횟수</p>
+          <p className="visit-counter-value">{visited}</p>{" "}
+          {/* 방문 횟수 출력 */}
         </div>
       </div>
 
