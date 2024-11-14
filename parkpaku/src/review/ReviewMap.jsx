@@ -1,9 +1,13 @@
-import { useEffect, useRef } from "react";
-import park0Image from "../assets/park_0.jpg";
-import parkDefaultImage from "../assets/park_default.jpg";
+import { useEffect, useRef, useState } from "react";
+import parkImage1 from "../assets/image/1.png";
+import parkImage2 from "../assets/image/2.png";
+import parkImage3 from "../assets/image/3.png";
+import parkImage4 from "../assets/image/4.png";
+import "./ReviewMap.css";
 
 function ReviewMap() {
   const mapRef = useRef(null);
+  const [parks, setParks] = useState([]);
   const { naver } = window;
 
   useEffect(() => {
@@ -14,7 +18,7 @@ function ReviewMap() {
 
     // 지도 초기화 옵션
     const mapOptions = {
-      center: new naver.maps.LatLng(35.1047846, 129.0190933),
+      center: new naver.maps.LatLng(35.1158949746728, 128.97636469434755),
       logoControl: false,
       mapDataControl: false,
       scaleControl: true,
@@ -27,44 +31,44 @@ function ReviewMap() {
     // 네이버 지도 생성
     mapRef.current = new naver.maps.Map("map", mapOptions);
 
-    // 마커 데이터 예시 (위도, 경도, 사진 URL)
-    const markerData = [
-      {
-        position: new naver.maps.LatLng(35.1047846, 129.0190933),
-        image: park0Image, // import한 이미지 사용
-      },
-      {
-        position: new naver.maps.LatLng(35.1317807, 128.9853735),
-        image: parkDefaultImage, // import한 이미지 사용
-      },
-      {
-        position: new naver.maps.LatLng(35.1090608, 128.9632928),
-        image: parkDefaultImage, // import한 이미지 사용
-      },
-      {
-        position: new naver.maps.LatLng(35.1037833, 128.9430727),
-        image: parkDefaultImage, // import한 이미지 사용
-      },
-    ];
+    // park_detail.json 파일에서 데이터 불러오기
+    fetch("/park_detail.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setParks(data); // JSON 데이터를 parks 상태에 저장
+        addMarkers(data); // 마커 추가
+      })
+      .catch((error) => {
+        console.error("Error loading park_detail.json:", error);
+      });
+  }, []);
 
-    // 마커 및 이미지 추가
-    markerData.forEach((data) => {
+  const addMarkers = (data) => {
+    data.forEach((park) => {
+      // 이미지 파일 이름을 기준으로 import된 이미지를 사용하도록 변경
+      let image;
+      if (park.id == 0) image = parkImage1;
+      else if (park.id == 3) image = parkImage2;
+      else if (park.id == 2) image = parkImage3;
+      else if (park.id == 4) image = parkImage4;
+      else image = "else"; // 기본 이미지
+
       const marker = new naver.maps.Marker({
-        position: data.position,
+        position: new naver.maps.LatLng(park.latitude, park.longitude),
         map: mapRef.current,
         icon: {
-          content: `<img src="${data.image}" width="60" height="60" style="border-radius: 50%;" />`, // 마커에 이미지를 삽입하고 크기 조정
-          size: new naver.maps.Size(60, 60), // 마커 크기 설정
-          anchor: new naver.maps.Point(30, 30), // 마커 중앙을 위치에 맞춤
+          content: `<img src="${image}" width="60" height="60" style="border-radius: 20%; border: 3px solid white;" />`, // 이미지 둥글게 만들고 흰 테두리 추가
+          size: new naver.maps.Size(60, 60),
+          anchor: new naver.maps.Point(30, 30), // 이미지의 중앙에 맞추기
         },
       });
     });
-  }, []);
+  };
 
   return (
     <div>
       <h2>소소하지만 확실한 후기</h2>
-      <div id="map" style={{ width: "100%", height: "400px" }}></div>
+      <div id="map" style={{ width: "100%", height: "75vh" }}></div>
     </div>
   );
 }
