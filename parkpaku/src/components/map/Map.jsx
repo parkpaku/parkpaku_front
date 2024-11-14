@@ -1,10 +1,16 @@
 import { useEffect, useRef } from 'react';
+import "./Map.css";
 
 function Map() {
   const mapRef = useRef(null);
   const { naver } = window;
   
   useEffect(() => {
+    if (!window.naver || !window.naver.maps) {
+        console.error("네이버 지도 API가 로드되지 않았습니다.");
+        return;
+      }
+
     // 네이버 지도 옵션 선택
     const mapOptions = {
       // 지도의 초기 중심 좌표
@@ -23,7 +29,17 @@ function Map() {
     );
   }, []);
 
-  return <div id="map" />
+  return (
+    <div>
+        <div id="map">
+            
+        <h1>야</h1>
+        </div>
+        
+        
+
+    </div>
+  );
 }
 
 export default Map;
