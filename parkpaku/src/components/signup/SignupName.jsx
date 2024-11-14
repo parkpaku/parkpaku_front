@@ -12,9 +12,9 @@ function SignupName({ onNext }) {
   };
 
   return (
-    <div className="form-container">
-      <h1 className="hi">만나서 반가워요!</h1>
-      <h1 className="your">본인의 정보를 입력해주세요</h1>
+    <div className="signup-form-container">
+      <h1 className="signup-heading">만나서 반가워요!</h1>
+      <h1 className="signup-subheading">본인의 정보를 입력해주세요</h1>
 
       <div className="input-group">
         <label htmlFor="name">이름</label>
@@ -43,7 +43,7 @@ function SignupName({ onNext }) {
       </div>
 
       <button
-        className={name && nickname ? "active" : ""} // 이름과 닉네임이 입력되면 버튼 활성화
+        className={`signup-button ${name && nickname ? "active" : ""}`} // 이름과 닉네임이 입력되면 버튼 활성화
         onClick={handleSubmit}
         disabled={!name || !nickname} // 둘 중 하나라도 없으면 비활성화
       >
