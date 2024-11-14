@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeMain from "./home/HomeMain";
 import BottomBar from "./common/BottomBar";
-import MyPaku from "./components/map/Map.jsx";
+import MyPaku from "./components/myPaku/Map.jsx";
 
 function App() {
   return (
