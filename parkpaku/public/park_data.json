@@ -1,17 +1,17 @@
 [
   {
     "name": "삼락 생태공원",
-    "location": "부산 사상구",
-    "visits": 3
+    "location": "사상구",
+    "visits": 7
   },
   {
     "name": "해운대 해수욕장",
-    "location": "부산 해운대구",
+    "location": "해운대구",
     "visits": 5
   },
   {
     "name": "부산 시민공원",
-    "location": "부산 남구",
+    "location": "남구",
     "visits": 2
   }
 ]
