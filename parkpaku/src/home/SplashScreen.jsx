@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // useNavigate 사용
-//import "./SplashScreen.css"; // 이미지 스타일을 위한 CSS 파일
+import "./SplashScreen.css"; // 이미지 스타일을 위한 CSS 파일
+import splashImage from "../assets/splash.png";
 
 function SplashScreen() {
   const navigate = useNavigate(); // 페이지 이동을 위한 훅
@@ -16,7 +17,7 @@ function SplashScreen() {
 
   return (
     <div className="splash-screen">
-      <img src="../assets/splash.png" alt="Splash" />
+      <img src={splashImage} alt="Splash" />
     </div>
   );
 }
