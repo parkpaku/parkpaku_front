@@ -67,6 +67,16 @@
   {
     "name": "민주공원",
     "location": "중구",
-    "visits": 11
+    "visits": 9
+  },
+  {
+    "name": "배산공원",
+    "location": "연제구",
+    "visits": 0
+  },
+  {
+    "name": "영도공원",
+    "location": "영도구",
+    "visits": 1
   }
 ]

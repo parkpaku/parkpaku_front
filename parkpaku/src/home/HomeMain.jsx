@@ -223,28 +223,31 @@ function HomeMain() {
                 flexWrap: "wrap",
               }}
             >
-              {groupedItems.map((group, index) => (
-                <div
-                  key={index}
-                  style={{
-                    marginRight: "20px",
-                    width: "80px",
-                    height: "130px",
-                  }}
-                >
-                  {/* SVG를 색상과 함께 렌더링 */}
-                  {React.cloneElement(getRegionSVG(group.location), {
-                    className: getRegionColor(group.visits), // 스타일을 적용할 CSS 클래스 이름을 추가
-                    style: {
-                      pointerEvents: "all",
-                      width: "100%", // SVG 크기 설정
-                      height: "100%", // SVG 크기 설정
-                    },
-                  })}
-                  {/* location 정보 출력 */}
-                  <p>{group.location}</p>
-                </div>
-              ))}
+              {/* groupedItems를 visits 합산을 기준으로 내림차순 정렬 */}
+              {groupedItems
+                .sort((a, b) => b.visits - a.visits) // visits 기준 내림차순 정렬
+                .map((group, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      marginRight: "20px",
+                      width: "80px",
+                      height: "130px",
+                    }}
+                  >
+                    {/* SVG를 색상과 함께 렌더링 */}
+                    {React.cloneElement(getRegionSVG(group.location), {
+                      className: getRegionColor(group.visits), // 스타일을 적용할 CSS 클래스 이름을 추가
+                      style: {
+                        pointerEvents: "all",
+                        width: "100%", // SVG 크기 설정
+                        height: "100%", // SVG 크기 설정
+                      },
+                    })}
+                    {/* location 정보 출력 */}
+                    <p>{group.location}</p>
+                  </div>
+                ))}
             </div>
           </div>
         </Link>
