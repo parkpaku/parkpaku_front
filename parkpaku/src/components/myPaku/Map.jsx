@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./Map.css";
+import { Link } from "react-router-dom";
 import PakuModal from "./PakuModal";
 import BottomSheet from "./BottomSheet";
 
@@ -35,9 +36,11 @@ function Map() {
   ];
 
   return (
-    <div>
+    <div className="map">
       <div>
-        <button>이전</button>
+        <Link to="/" className="back">
+          ◀이전
+        </Link>
         <h1>나의 Paku</h1>
       </div>
       <div id="map">
