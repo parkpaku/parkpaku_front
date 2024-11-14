@@ -7,7 +7,7 @@ import "./BottomBar.css";
 function BottomBar() {
   return (
     <nav className="bottom-bar">
-      <Link to="/" className="bottom-bar-item">
+      <Link to="/home" className="bottom-bar-item">
         <AiFillHome size={24} />
         <span>홈</span>
       </Link>
