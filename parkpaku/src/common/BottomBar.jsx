@@ -15,9 +15,9 @@ function BottomBar() {
         <MdForum size={24} />
         <span>커뮤니티</span>
       </Link>
-      <Link to="/myPaku" className="bottom-bar-item">
+      <Link to="/profile" className="bottom-bar-item">
         <AiFillInfoCircle size={24} />
-        <span>나의 paku</span>
+        <span>내정보</span>
       </Link>
     </nav>
   );

@@ -2,16 +2,38 @@
   padding: 16px;
 }
 
+.home-main h2 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 24px;
+  color: #000;
+}
+
 .header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 16px;
 }
 
 .header-image-placeholder {
-  width: 100%;
-  height: 50px;
+  width: 60px; /* 필요시 크기 조정 */
+  height: 30px;
   background-color: #ccc;
-  margin-bottom: 8px;
-  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+}
+
+.profile-placeholder {
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
 }
 
 .colored-area {
@@ -24,17 +46,17 @@
   height: 250px;
   background-color: #e0e0e0;
   position: relative;
-  border-radius: 12px;
+  border-radius: 18px;
 }
 
 .colored-area h3 {
   position: absolute;
-  top: 8px; /* 필요에 따라 조정 */
-  left: 8px; /* 필요에 따라 조정 */
+  top: 8px;
+  left: 8px;
   margin: 0;
   padding: 0;
-  font-size: 16px; /* 필요에 따라 조정 */
-  color: #000; /* 필요에 따라 색상 조정 */
+  font-size: 16px;
+  color: #000;
 }
 
 .summary-section {
@@ -42,6 +64,9 @@
   justify-content: space-between;
   margin-bottom: 16px;
   gap: 16px;
+  background-color: #f3f3f3;
+  padding: 15px;
+  border-radius: 18px;
 }
 
 .summary-item {
@@ -51,7 +76,7 @@
 .summary-image-placeholder {
   width: 40px;
   height: 40px;
-  background-color: #ccc;
+  background-color: #d9d9d9;
   margin-bottom: 4px;
 }
 
@@ -59,10 +84,15 @@
   margin-bottom: 16px;
 }
 
+.popular-section h3 {
+  padding-top: 10px;
+  font-size: 20px;
+  color: #000;
+}
+
 .popular-paku-scroll-container {
   display: flex;
   overflow-x: auto;
-  padding: 8px 0;
   gap: 8px;
   white-space: nowrap;
   scroll-behavior: smooth;
