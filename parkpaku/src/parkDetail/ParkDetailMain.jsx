@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ParkDetailMain.css";
-import parkImage from "../assets/park_1.jpg";
+
+import parkImage from "../assets/park_default.jpg";
+import parkImage0 from "../assets/park_0.jpg";
+import parkImage1 from "../assets/park_1.svg";
+
+const SERVER_IP = process.env.REACT_APP_SERVER_IP;
 
 function ParkDetailMain({
   visitCount = 2,
@@ -9,38 +14,50 @@ function ParkDetailMain({
 }) {
   const [copyMessage, setCopyMessage] = useState("");
   const [parkData, setParkData] = useState({
-    id: 0,
+    id: "",
     name: "",
     type: "",
     description: "",
     location: "",
     latitude: "",
-    ongitude: "",
-    likes: 0,
+    longitude: "",
+    likes: "",
   });
+  const [userLocation, setUserLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+  const [isVerifying, setIsVerifying] = useState(false); // 인증 중 상태
+  const [verificationMessage, setVerificationMessage] = useState(""); // 인증 결과 메시지
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const selectImage = (id) => {
+    console.log("id:", id);
+    switch (id) {
+      case 0:
+        return parkImage0;
+      case 1:
+        return parkImage1;
+      default:
+        return parkImage; // 기본 이미지
+    }
+  };
 
   useEffect(() => {
     const fetchParkData = async () => {
       try {
-        const response = await fetch(
-          "https://93a0-2001-e60-cb42-6d6b-d99a-3e77-504a-86ee.ngrok-free.app/park/0",
-          {
-            method: "GET",
-            headers: new Headers({
-              "Content-Type": "application/json",
-              "ngrok-skip-browser-warning": "69420",
-            }),
-          }
-        );
+        const response = await fetch(`${SERVER_IP}/park/${id}`, {
+          method: "GET",
+          headers: new Headers({
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "any",
+          }),
+        });
 
-        console.log("response:", response);
         const contentType = response.headers.get("content-type");
-        console.log("응답의 Content-Type:", contentType); // 응답의 Content-Type 출력
-
         if (contentType && contentType.includes("application/json")) {
           const data = await response.json();
-          console.log("가져온 데이터:", data);
           setParkData(data); // 데이터를 상태에 설정
         } else {
           const textResponse = await response.text();
@@ -51,8 +68,10 @@ function ParkDetailMain({
       }
     };
 
-    fetchParkData();
-  }, []);
+    if (id) {
+      fetchParkData(); // id가 존재할 경우 데이터 가져오기
+    }
+  }, [id]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(parkData.location).then(() => {
@@ -65,14 +84,12 @@ function ParkDetailMain({
     navigate(`/reviewWrite/${parkData.id}`);
   };
 
-  const [userLocation, setUserLocation] = useState({
-    latitude: null,
-    longitude: null,
-  });
-
-  // 현재 유저의 위치 값 얻기
+  // 현재 유저의 위치 값 얻기 및 Paku 인증 시작
   const getLocation = () => {
     if (navigator.geolocation) {
+      setIsVerifying(true); // 인증 중 상태로 변경
+      setVerificationMessage("인증 중이에요\n잠시만 기다려주세요...");
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -81,19 +98,21 @@ function ParkDetailMain({
           checkProximity(latitude, longitude);
         },
         (error) => {
+          setIsVerifying(false);
+          setVerificationMessage("위치를 가져오는데 실패했습니다.");
           console.error("위치를 가져오는데 실패했습니다.", error);
         }
       );
     } else {
+      setVerificationMessage("이 브라우저는 Geolocation을 지원하지 않습니다.");
       console.error("이 브라우저는 Geolocation을 지원하지 않습니다.");
     }
   };
 
   // Paku 인증
   const checkProximity = (latitude, longitude) => {
-    // 특정 위치 예시 (예: 위도 37.7749, 경도 -122.4194)
-    const targetLatitude = 35.1158949746728;
-    const targetLongitude = 128.97636469434755;
+    const targetLatitude = parkData.latitude;
+    const targetLongitude = parkData.longitude;
     const distance = calculateDistance(
       latitude,
       longitude,
@@ -101,11 +120,12 @@ function ParkDetailMain({
       targetLongitude
     );
 
+    setIsVerifying(false); // 인증 상태 해제
     if (distance <= 3) {
       // 예: 3km 이내
-      console.log("특정 위치 주변에 있습니다.");
+      setVerificationMessage("최고예요!\n다녀온 Paku 수가 늘었어요");
     } else {
-      console.log("특정 위치에서 멀리 떨어져 있습니다.");
+      setVerificationMessage("현재 위치가 해당 위치와 멀리 떨어져 있습니다.");
     }
   };
 
@@ -137,6 +157,9 @@ function ParkDetailMain({
         <h4>{parkData.type}</h4>
         <p className="park-info-name">{parkData.name}</p>
         <p className="park-info-des">{parkData.description}</p>
+        {/* <p className="park-info-des">
+          위도: {parkData.latitude} | 경도: {parkData.longitude}
+        </p> */}
       </div>
 
       <div className="tags-container">
@@ -150,7 +173,7 @@ function ParkDetailMain({
       <div className="like-count-container">
         <div className="like-counter">
           <p className="like-counter-label">좋아요</p>
-          <p className="like-counter-value">{parkData.like}</p>
+          <p className="like-counter-value">{parkData.likes}</p>
         </div>
         <div className="visit-counter">
           <p className="visit-counter-label">가본 횟수</p>
@@ -164,6 +187,24 @@ function ParkDetailMain({
           지금 공원에 있다면 인증해보세요
         </span>
       </button>
+
+      {(isVerifying || verificationMessage) && (
+        <div className="verification-modal">
+          <div className="modal-content">
+            <p>{verificationMessage}</p>
+            {!isVerifying && verificationMessage.includes("최고예요") && (
+              <button onClick={() => setVerificationMessage("")}>
+                네, 좋아요.
+              </button>
+            )}
+            {!isVerifying && verificationMessage.includes("현재") && (
+              <button onClick={() => setVerificationMessage("")}>
+                확인했어요.
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       <button className="write-review-button" onClick={handleWriteReview}>
         후기 쓰기
