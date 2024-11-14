@@ -10,7 +10,7 @@ function SignupRegion({ onNext, onPrev }) {
     if (region) {
       console.log(region);
       onNext(region); // 지역을 부모로 전달
-      navigate("/");
+      navigate("/home");
     } else {
       alert("지역을 선택해주세요.");
     }

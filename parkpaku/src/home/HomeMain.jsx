@@ -120,9 +120,8 @@ function HomeMain() {
   const getRegionColor = (visits) => {
     if (visits === 0) return "color-gray"; // 방문 수 0: 회색
     if (visits >= 1 && visits <= 3) return "color-light"; // 1~3: 연한 색
-    if (visits >= 4 && visits <= 6) return "color-medium"; // 4~6: 중간 색
-    if (visits >= 7 && visits <= 10) return "color-dark"; // 7~10: 진한 색
-    if (visits >= 11) return "color-dip-dark"; // 11개 이상 : 가장 진한 색
+    if (visits >= 4 && visits <= 6) return "color-medium"; // 4~6: 중간 색 (주황색)
+    if (visits >= 7 && visits <= 10) return "color-dark"; // 7~10: 진한 색 (빨간색)
     return "color-gray"; // 기본 색상
   };
 
@@ -172,9 +171,9 @@ function HomeMain() {
         <div className="header-image-placeholder">
           <img src={logoPath} alt="로고" />
         </div>
-        <Link to="/signup">
+        {/* <Link to="/signup">
           <div className="profile-placeholder">회원가입</div>
-        </Link>
+        </Link> */}
         <Link to="/my">
           <img src={profilePath} className="profile-placeholder" alt="프로필" />
         </Link>
@@ -187,10 +186,7 @@ function HomeMain() {
       </h2>
 
       <section className="colored-area">
-        <Link
-          to="/myPakuList"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
+        <Link to="/myPaku" style={{ textDecoration: "none", color: "inherit" }}>
           <div className="colored-area-placeholder">
             <div
               id="map"
