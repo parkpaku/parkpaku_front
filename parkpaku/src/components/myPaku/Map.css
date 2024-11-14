@@ -1,6 +1,5 @@
 #map {
-    width: 98.5%;
-    height: 50vh; /* 원하는 높이로 설정 */
-    border: 5px solid black;
-  }
-  
+  width: 98.5%;
+  height: 50vh; /* 원하는 높이로 설정 */
+  border: 5px solid black;
+}

@@ -1,5 +1,5 @@
-import React from 'react';
-import './PakuModal.css';
+import React from "react";
+import "./PakuModal.css";
 
 function PakuModal({ onClose }) {
   return (
