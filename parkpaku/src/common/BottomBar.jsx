@@ -18,9 +18,9 @@ function BottomBar() {
         <img src={myPakuIcon} className="bottom-bar-icon" />
         <span>나의 Paku</span>
       </Link>
-      <Link to="/profile" className="bottom-bar-item">
+      <Link to="/reviewMap" className="bottom-bar-item">
         <img src={myPakuIcon} className="bottom-bar-icon" />
-        <span>내정보</span>
+        <span>소확후</span>
       </Link>
     </nav>
   );

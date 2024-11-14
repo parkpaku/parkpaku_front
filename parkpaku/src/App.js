@@ -12,6 +12,7 @@ import PakuDetail from "./parkDetail/ParkDetailMain.jsx";
 import Signup from "./components/signup/Signup.jsx";
 import ReviewWrite from "./review/ReviewWrite.jsx";
 import SplashScreen from "./home/SplashScreen.jsx";
+import ReviewMap from "./review/ReviewMap.jsx";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function AppContent() {
           <Route path="/" element={<SplashScreen />} />
           <Route path="/home" element={<HomeMain />} />
           <Route path="/myPakuList" element={<MyPakuList />} />
+          <Route path="/reviewMap" element={<ReviewMap />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/paku/:id" element={<PakuDetail />} />
           <Route path="/reviewWrite/:id" element={<ReviewWrite />} />

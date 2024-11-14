@@ -231,9 +231,9 @@ function HomeMain() {
                   <div
                     key={index}
                     style={{
-                      marginRight: "20px",
-                      width: "80px",
-                      height: "130px",
+                      marginRight: "10px",
+                      width: "calc(22% - 10px)",
+                      height: "100px",
                     }}
                   >
                     {/* SVG를 색상과 함께 렌더링 */}
