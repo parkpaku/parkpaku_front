@@ -159,8 +159,8 @@ function ParkDetailMain({
     );
 
     setIsVerifying(false);
-    if (distance <= 1.5) {
-      // 예: 1.5km 이내
+    if (distance <= 1) {
+      // 예: 1km 이내
       setVeriTitle("최고예요!");
       setVerificationMessage("다녀온 Paku 수가 늘었어요!");
     } else {

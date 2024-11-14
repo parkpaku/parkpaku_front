@@ -29,7 +29,7 @@ function Signup() {
       const SERVER_IP = process.env.REACT_APP_SERVER_IP;
 
       axios
-        .post(`${SERVER_IP}/signup`, {
+        .post(`localhost:3000/signup`, {
           name: "John",
           memberId: "fff",
           password: "12345678",
