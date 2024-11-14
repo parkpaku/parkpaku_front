@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./MyPakuList.css";
 
 function Map() {
   const [items, setItems] = useState([]); // 구역 데이터
   const [activeTab, setActiveTab] = useState("visited"); // 현재 활성화된 탭
+  const navigate = useNavigate();
 
   useEffect(() => {
     // JSON 파일을 fetch로 불러와서 상태에 저장
@@ -19,6 +20,10 @@ function Map() {
       });
   }, []);
 
+  const handleItemClick = (id) => {
+    navigate(`/parkDetail/${id}`); // 상세 페이지로 이동 (id를 URL에 포함)
+  };
+
   return (
     <div className="map">
       <div>
@@ -30,7 +35,7 @@ function Map() {
       <div className="tabs">
         <div
           className={`tab ${activeTab === "visited" ? "active" : "inactive"}`}
-          onClick={(e) => {
+          onClick={() => {
             setActiveTab("visited");
           }}
         >
