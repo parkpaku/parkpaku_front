@@ -272,7 +272,7 @@ function HomeMain() {
       </section>
 
       <section className="popular-section">
-        <h3>인기있는 Paku</h3>
+        <h3>추천하는 Paku</h3>
         <div className="popular-paku-scroll-container">
           {popularPacus.map((paku) => (
             <PopularPakuCard
