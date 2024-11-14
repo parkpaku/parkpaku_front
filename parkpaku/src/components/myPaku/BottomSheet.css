@@ -1,5 +1,6 @@
 .sliding-bottom-sheet {
   position: fixed;
+  margin: 5px;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -11,6 +12,7 @@
   transition: transform 0.3s ease-in-out;
   touch-action: none; /* 터치 제스처 활성화 */
   overflow: hidden; /* 내용이 넘치지 않도록 설정 */
+  z-index: 1000;
 }
 
 .handle-bar {
@@ -52,6 +54,7 @@
   justify-content: space-between;
   padding: 8px 0;
   border-bottom: 1px solid #e0e0e0;
+  margin: 0 15px;
 }
 
 .list-item button {
