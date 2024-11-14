@@ -16,8 +16,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeMain />} />
             <Route path="/myPaku" element={<MyPaku />} />
-            <Route path="/pakuDetail" element={<PakuDetail />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/paku/:id" element={<PakuDetail />} />
           </Routes>
         </main>
         <BottomBar />
