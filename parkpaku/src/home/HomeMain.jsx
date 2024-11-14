@@ -16,7 +16,10 @@ function HomeMain() {
     <div className="home-main">
       <section className="header-section">
         <div className="header-image-placeholder">로고</div>
-        <Link to="/myPaku">
+        <Link to="/signup">
+          <div className="profile-placeholder">회원가입</div>
+        </Link>
+        <Link to="/my">
           <div className="profile-placeholder">프로필</div>
         </Link>
       </section>

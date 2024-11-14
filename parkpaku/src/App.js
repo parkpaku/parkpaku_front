@@ -4,6 +4,7 @@ import HomeMain from "./home/HomeMain";
 import BottomBar from "./common/BottomBar";
 import MyPaku from "./components/myPaku/Map.jsx";
 import PakuDetail from "./parkDetail/ParkDetailMain.jsx";
+import Signup from "./components/signup/Signup.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<HomeMain />} />
             <Route path="/myPaku" element={<MyPaku />} />
             <Route path="/pakuDetail" element={<PakuDetail />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </main>
         <BottomBar />
