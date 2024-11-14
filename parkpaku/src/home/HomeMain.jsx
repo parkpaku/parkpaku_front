@@ -1,7 +1,16 @@
 import React from "react";
-import "./HomeMain.css"; // CSS 파일 추가
+import PopularPacuCard from "./PopularPakuCard"; // 파일명도 일치시키기
+import "./HomeMain.css";
 
 function HomeMain() {
+  // 예시 데이터
+  const popularPacus = [
+    { title: "Pacu 1", description: "인기있는 Pacu 1 설명" },
+    { title: "Pacu 2", description: "인기있는 Pacu 2 설명" },
+    { title: "Pacu 3", description: "인기있는 Pacu 3 설명" },
+    { title: "Pacu 4", description: "인기있는 Pacu 4 설명" },
+  ];
+
   return (
     <div className="home-main">
       <section className="header-section">
@@ -32,14 +41,18 @@ function HomeMain() {
           <p>4개</p>
         </div>
       </section>
-
       <section className="popular-section">
-        <h3>인기있는 Pacu</h3>
-        <div className="popular-item-list">
-          <div className="popular-item-placeholder" />
-          <div className="popular-item-placeholder" />
-          <div className="popular-item-placeholder" />
-          <div className="popular-item-placeholder" />
+        <h3>인기있는 Paku</h3>
+        <div className="popular-paku-scroll-container">
+          {" "}
+          {/* 클래스명 통일 */}
+          {popularPacus.map((pacu, index) => (
+            <PopularPacuCard
+              key={index}
+              title={pacu.title}
+              description={pacu.description}
+            />
+          ))}
         </div>
       </section>
     </div>

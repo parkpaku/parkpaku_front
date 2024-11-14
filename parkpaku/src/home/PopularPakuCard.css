@@ -1,0 +1,17 @@
+.popular-pacu-card {
+  width: 150px;
+  margin: 0 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.card-image-placeholder {
+  width: 100%;
+  height: 80px;
+  background-color: #e0e0e0;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}

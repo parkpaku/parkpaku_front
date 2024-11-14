@@ -44,13 +44,20 @@
   margin-bottom: 16px;
 }
 
-.popular-item-list {
+.popular-paku-scroll-container {
+  /* 클래스명 통일 */
   display: flex;
-  justify-content: space-between;
+  overflow-x: auto;
+  padding: 8px 0;
+  gap: 8px;
+  white-space: nowrap; /* 줄바꿈 방지 */
+  scroll-behavior: smooth; /* 부드러운 스크롤링 효과 */
 }
 
-.popular-item-placeholder {
-  width: 22%;
-  height: 100px;
-  background-color: #e0e0e0;
+.popular-paku-scroll-container > * {
+  flex: 0 0 auto; /* 자식 요소가 가로로 고정되도록 설정 */
+}
+
+.popular-paku-scroll-container::-webkit-scrollbar {
+  display: none; /* 스크롤바 숨김 */
 }
