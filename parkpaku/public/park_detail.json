@@ -27,10 +27,10 @@
     "type": "도시, 테마공원",
     "description": "동아대 앞에 있는 공원",
     "location": "부산 사하구 하단동",
-    "latitude": "35.10906114543441",
-    "longitude": "128.96329164505005",
-    "image": "../assets/image/3.png",
-    "likes": 12
+    "latitude": "35.11562945126414",
+    "longitude": "128.96711705619643",
+    "likes": "2,132"
+
   },
   {
     "id": 3,
